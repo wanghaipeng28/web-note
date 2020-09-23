@@ -1,0 +1,156 @@
+<html>
+	<head>
+		<title>BootStrap-Day02</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+四、全局 CSS 样式
+	1、使用 boot 提供的全局样式的时候：使用 F12 查看源代码
+	2、容器：包含其他元素的div/header/section等
+		container：固定宽度的---》针对于不同尺寸的屏幕，拥有不同的width
+		container-fluit（液体，流动）：100%，适用于移动设备
+	3、按钮的样式
+		btn：添加按钮的基本的样式：尺寸、边框
+		其他样式类：颜色、状态
+			btn-default/danger/warning/info/primary/success
+		---》CSS 中多类 &lt;p class="s1 s2 d3"
+		active：根据当前元素的样式，进行重点提示的效果
+		btn-block：常用于移动设备，实现大个
+		尺寸：btn-default/btn-lg/btn-sm/btn-xs
+		disabled：禁用的状态
+	4、图片的样式
+		响应式：img-thumbnail(边框，常用于缩略图)
+			img-responsive（没有其他样式）
+			---》max-width:;
+		非响应
+			img-circle
+			img-rounded
+	5、文本的样式
+		文本颜色：tex-dange/success/....
+		文本对齐：text-center/
+		文本大小写：text-lowercase/..
+		bg-danger/success/..---》可以为所有元素使用
+		lead ---类似于 active--实现着重突出显示的效果
+
+		关于颜色：有一个比较饱和的主色调--作为网站的基色
+			lighter(80%)  60%  30%
+			darker()
+
+	6、其他小样式
+每日一练：完成响应式布局的页面（手写）
+	  进一步熟练使用工具
+
+	7、列表
+		ul ol dl/dt/dd---适用于大框中包含多个并列的小框
+		a、结构
+		b、 list-inline/unstyled
+		c、快捷键  ul>li
+
+	8、表格
+		a、结构
+		b、基础的样式 table--》横向边框、宽度
+		c、其他样式
+			table-striped---》隔行变色
+			table-hover---》鼠标悬停变色
+			table-bordered---》竖向边框
+		d、响应式表格：当表格的尺寸超过最小屏幕的尺寸时，表格区域出现滚动条，页面不受影响
+			&lt;div class="table-responsive">
+				&lt;table>
+
+	9、栅格系统：实现整个页面的响应式布局--》页面的组成部分，根据屏幕尺寸的不同，占不同的比例
+		a、将屏幕横向划分为 12 等分
+		b、定义各个块占：某种屏幕下，占几个等分
+		c、将页面从上向下分为几个大的组成块--row
+			row行中：从左向右分为组成块（col列）
+		d、列：如何占比-->*是数字（1-12），表示占比
+				col-lg-*   1200px---超大屏幕PC
+				col-md-*   992------PC
+				col-sm-*   768 -- 991--PAD
+				col-xs-*   767--PHONE
+---》底层代码添加的 width:？%  float:left;
+
+		e、关于列的宽度：
+			col-sm-8：在小屏、中、大都会占8格
+				   在xs情况下，会失效
+
+		f、自适应：大小尺寸下，都能显示
+		&lt;div class="col-md-6 col-sm-8 col-xs-10">
+
+		g、设置隐藏：hidden-lg/md/sm/xs
+
+		h、列的偏移：设置列向右移动 col-md-offset-*
+
+		i、列的嵌套：往往用来实现复杂的布局效果
+&lt;div class="row">
+	&lt;div>&lt;/div>
+	&lt;div class="col-md-8 col-sm-12">
+		&lt;div class="row">
+			&lt;div class="col-md-3 col-sm-6 col-xs-12">&lt;/div>
+		&lt;/div>
+	&lt;/div>
+&lt;/div>
+			
+			
+&lt;div class="row">
+	&lt;header class="col-lg-12">&lt;/header>
+&lt;/div>
+&lt;div class="row">
+	&lt;aside class="col-lg-3">&lt;/aside>
+	&lt;div class="col-lg-7">&lt;/div>	
+	&lt;aside class="col-lg-2">&lt;/aside>
+&lt;/div>
+&lt;div class="row">
+	&lt;footer class="col-lg-12">&lt;/footer>
+&lt;/div>
+
+	10、表单
+		a、基础表单
+			文本和控件，都分别独占一行---》适用于小屏
+			&lt;form>
+				&lt;div class="form-group">
+					&lt;label>
+					&lt;input>
+				&lt;/div>
+
+		b、内联表单：文本和控件都在同一行，可能和其他控件也位于同一行----》页面结构非常紧凑的情况下
+
+		c、水平表单：一行里，分为三个组成部分（文本、控件、提示信息）
+		将表单结合栅格系统的方式来实现
+			&lt;form class="">
+    			   &lt;div class="form-group"--》类似于row
+				&lt;div class="col-xs-5 col-xs-offset-*"
+					&lt;label/input/span
+
+		d、组成元素的基础样式	
+			control-label  --》标签文本
+			form-control  --》控件
+			help-block    --》提示文本
+
+	11、辅助样式
+		a、关于浮动		
+&lt;div>
+	&lt;p style="float:left;">&lt;/p>
+	&lt;p style="float:left">&lt;/p>
+&lt;/div>
+&lt;h1>&lt;/h1>		:after {..}
+使用boot提供的样式类
+&lt;div class="clearfix">
+	&lt;p class="pull-left">&lt;/p>
+	&lt;p class="pull-left">&lt;/p>
+&lt;/div>  
+&lt;h1>&lt;/h1>
+		b、隐藏
+			.hidden     ---》display:none;
+			.invisible  ---》visibility:;
+			区别：display为none，从文档中彻底删除
+				visible：不可见
+ &lt;span>11&lt;/span>
+ &lt;span class="hidden">22&lt;/span>
+ &lt;span>33&lt;/span>
+ &lt;span class="invisible">44&lt;/span>
+ &lt;span>55&lt;/span>
+
+		</pre>
+	</body>
+</html>

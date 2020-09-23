@@ -1,0 +1,159 @@
+<html>
+	<head>
+		<title>BOM-Day05</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+正课: 
+1. BOM的常用对象: history location navigator
+2. *****Event: 
+
+1. BOM的常用对象: 
+   history: 保存当前窗口打开后，访问过的url的历史记录栈
+      开发人员无法访问历史记录栈的内容。
+      前进，后退，刷新
+      history.go(1)
+      history.go(-1)
+      history.go(0)
+      history.go(n)
+
+   location: 保存当前窗口正在打开的url的信息
+      protocol: 协议 :前的协议名: http
+      host: 主机名和端口号
+      hostname: 主机名
+      port: 端口号 如果端口号为""，默认是80
+      pathname: 相对路径名
+      search: 获得?及之后的查询字符串参数列表
+      
+      在当前窗口打开新连接: 
+        open("url","_self");
+        location.href="url";
+	location="url";
+	location.assign("url");
+
+      在当前窗口打开新连接，禁止后退
+      location.replace("url");
+
+      刷新: 
+      location.reload(force);
+                      false //优先从服务器缓存中快速获取
+                            //除非缓存中文件和硬盘文件修改时间				      不一致，才会再次去硬盘获取
+                      true //强制服务器绕过缓存，始终读硬盘
+ 
+    navigator: 专门封装浏览器软件和配置信息的对象
+      .cookieEnabled: 判断当前浏览器是否启用cookie	
+      .plugins: 封装浏览器安装的所有插件列表
+      .userAgent: 记录浏览器内核，名称和版本号的字符串
+
+
+正课: 
+1. *****Event
+   什么是事件: 用户手动触发的或浏览器自动触发的页面内容状态的改变。
+   浏览器都会监听事件的发生: 
+   1. 自动触发事件处理函数: 
+      事件处理函数: 当事件发生时，自动调用的函数
+	如何定义:3种: 
+	1. 在html元素的开始标签中: 
+	 &lt;button onclick="js语句">
+         DOM: var btn=document.createElement("button");
+              btn.onclick=new Function("js语句");
+	 事件发生时: btn.onclick();//事件处理函数
+         js语句中的this->btn
+	 缺点: 不符合内容与行为分离的原则——不便于维护
+        2. 在js中，为元素动态绑定事件处理函数:　2种:
+         1. elem.onclick=function(){
+		//this->elem
+            }
+          事件发生时: elem.onclick();
+         优点: 符合内容与行为分离的原则——便于维护
+         缺点: 一次onclick只能绑定一个函数对象
+
+	 2. elem.addEventListener("事件名",函数对象,捕获)
+            其中: 捕获: bool：是否在捕获阶段就提前出发
+		默认为false，默认都在冒泡阶段触发
+                改为true，当前事件处理函数可在捕获阶段提前触发
+	   btn.addEventListener("click",function(){...})
+         优点: 同一时刻可为一个onclick绑定多个函数对象
+	    IE8: elem.attachEvent("事件处理函数名",函数对象)
+
+*****事件周期: 当事件发生时，一直到所有事件处理函数执行完
+      为什么: 因为点击内层元素，等效于同时点在了外层父元素上
+  DOM 3个阶段: 
+         1. 捕获: 由外向内，记录各级元素绑定的事件处理函数
+		捕获只到目标元素结束
+         2. 目标出发：出发实际点击的元素上的事件处理函数
+         3. 冒泡: 由内向外，依次执行各级元素绑定的事件处理函数
+	        冒泡只从目标元素开始
+      目标元素: 实际触发事件的元素
+  IE8 2个阶段: 目标出发，冒泡，没有捕获
+
+   2. 封装事件对象:
+      事件对象: 专门封装事件发生时的鼠标，键盘，屏幕，元素等信息。
+      如何获得事件对象: 
+	DOM: 调用事件处理函数时，自动将创建的event对象作为第一个参数传入函数对象中。
+        IE8: 调用事件处理函数时，将event对象保存到全局变量event中: window.event
+	兼容: e=e||window.event;
+
+      取消冒泡: 不再冒泡执行父元素上的事件处理函数
+        何时取消: 不希望继续冒泡执行父元素上的事件处理函数时
+        如何取消: DOM: e.stopPropagation();
+                  IE8: e.cancelBubble=true;
+            兼容: if(e.stopPropagation){
+		      e.stopPropagation();
+                  }else{
+		      e.cancelBubble=true;
+                  }
+      利用冒泡: 
+        js优化: 如果多个平级的子元素都定义了相同的事件处理函数，则只要在父元素上定义一次事件处理函数，所有子元素公用。
+        为什么: 页面中每个事件绑定都会创建一个事件监听对象。绑定的事件处理函数越多，创建的事件监听对象就越多。导致大量内存占用，降低执行效率。所以，要尽量减少页面中绑定的事件处理函数个数
+      获得目标元素: DOM: e.target
+                    IE8: e.srcElement
+                    兼容: var target=e.target||e.srcElement;
+
+      取消事件: 在事件处理函数执行过程中，如果出现问题，可取消本次事件，相当于没发生过。
+	何时使用: 只要不希望默认的事件行为继续执行时
+        如何取消: 
+          1. 用html绑定的事件处理函数： 2个return
+	     第一个return：写在html开始标签的事件绑定中
+
+       课堂练习: form元素: 事件: onsubmit() 
+                             在正式提交表单前自动触发
+	                  专门在提交前执行验证，还可取消提价
+          2. 用js动态绑定的事件处理函数: 
+             取消事件: DOM: e.preventDefault()
+                       IE8: e.returnValue=false;
+                     兼容: if(e.preventDefault){
+                               e.preventDefault();
+                           }else{
+                               e.returnValue=false;
+                           }
+1. 页面滚动: 
+   事件: window.onscroll 当页面发生滚动时触发
+     scrollTop: 页面滚动的距离
+       document.documentElement.scrollTop
+	||document.body.scrollTop
+     用程序控制页面滚动: window.scrollTo(0,scrollTop)
+                         window.scrollBy(0,scrollTop的增量)
+   属性: 
+     elem.offsetTop: 距离相对定位的父元素顶部的距离 >=Top
+     elem.offsetParent: 获得elem相对定位的父元素
+     计算任意元素距页面顶部的距离: 
+     function getTop(elem){
+	//声明变量sum，初始为elem的offsetTop
+	//反复获取elem的offsetParent
+	    //将elem.offsetParent的offsetTop累加到sum上
+	    //将elem换成elem的offsetParent
+        //(遍历结束)
+        //返回sum
+     }
+
+     鼠标的坐标: 4组
+       1. 相对于屏幕的坐标: e.screenX/screenY
+       2. 相对于页面左上角的坐标: e.pageX/pageY  IE8不支持
+       3. 相对于文档显示区左上角的坐标: e.clientX/x
+                                        e.clientY/y
+       4. 相对于当前元素左上角的坐标:
+		</pre>
+	</body>
+</html>

@@ -1,0 +1,104 @@
+<html>
+	<head>
+		<title>DOM-Day02</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+正课
+1. 修改
+   改内容
+   改属性: 标准属性，自定义属性
+   改样式: 内联样式，样式表(外部/内部)
+
+1. 获取和修改元素的内容:
+   1. 获取和修改原始的html内容:
+	elem.innerHTML: 指代元素开始标签到结束标签之间的一切html原文。
+   2. 获取和修改纯文本的内容:
+	(不包含子元素的标签，自动转换特殊字符)
+	elem.textContent: 指代元素开始标签到结束标签之间的文本正文。（IE8不兼容）
+        IE8 : elem.innerText
+
+2. 获取和修改元素的属性: 
+   1. 标准属性: 
+      核心DOM: 万能
+	获取属性: 
+	   1. 获取所有属性的集合: elem.attributes
+	   2. 获取属性节点对象: (了解)
+		var node=elem.attributes[i/"属性名"]
+                var node=elem.getAttributeNode("属性名")
+           3. 获得属性值: 
+                elem.attributes[i/"属性名"].value
+		elem.getAttributeNode("属性名").value
+		var value=elem.getAttribute("属性名")
+	设置属性: 
+	   node.value="值"; 了解
+           elem.setAttribute("属性名","值")
+      HTML DOM: 仅能访问标准属性
+        elem.属性名="值";
+
+      class属性: 核心DOM API中，写"class"
+                 HTML DOM中，写为.className
+
+   2. 自定义属性:
+
+
+正课：
+1. 修改: 
+   修改属性: 标准属性，自定义属性
+   修改样式: 内联样式，样式表
+
+1. 修改属性: 
+   1. 标准属性: HTML标准中已经规定好的元素属性
+      核心DOM: 
+        elem.attributes 封装了所有属性节点的集合
+        elem.getAttribute("属性名") 获得指定属性的值
+        elem.setAttribute("属性名","属性值") 设置指定属性的值
+        elem.removeAttribute("属性名") 移除属性
+	elem.hasAttribute("属性名") 判断元素是否包含指定属性
+
+      HTML DOM:
+        elem.属性名
+	   如果不包含指定属性，则返回""
+	   如果给一个属性赋值为""，相当于移除了
+
+   2. 自定义属性: 在元素开始标签中定义的自定义属性名的属性
+        只能使用核心DOM访问
+
+      特性attribute vs 属性property
+      attribute: 指出现在html元素开始标签中的标准属性
+      property: 内存中，对象上的保存一个数据的属性变量
+ 
+      HTML DOM将标准attribute，同样也封装为了内存中元素对象的property
+
+      HTML5中: 规定: 
+       html中如何定义自定义属性: data-属性名="值"
+       js中如何定义自定义属性: elem.dataset.属性名="值"
+
+       如何访问: elem.dataset.属性名
+
+2. 获取或修改元素的样式: 
+   HTML DOM:
+    内联样式: 
+      获取: elem.style.属性名
+               style: 封装所有CSS属性的CSSStyleDeclaration对象
+	  js中CSS属性名都变为: 去横线改驼峰
+      问题: 只能获得内联样式
+      解决: 获得计算后的样式: 一个元素最终应用的所有样式
+	即包含内联样式，又包含样式表中的样式和浏览器的默认样式
+	var style=getComputedStyle(elem) 
+             IE8: elem.currentStyle
+        var value=style.属性名
+
+    样式表: 危险，了解
+      找到要修改的属性所在的位置: 
+        1. 找到样式表: var sheet=document.styleSheets[i]
+        2. 获得样式表中要修改的CSSRule对象: 
+		var rule=sheet.cssRules[i]
+        3. 获得CSSRule对象中的一个属性: 
+	    	var value=rule.style.属性名
+        特殊: 动画的关键帧规则中：
+            rule.cssRules[i]获取每一帧的CSSRule对象
+		</pre>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<title>AJAX-Day08</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1.字符串数据格式——JSON
+  JSON是一种字符串格式的规范，被各种编程语言所支持，用于在不同的系统/不同的编程语言之间传递字符串数据——JSON的作用与XML一样，都是一种字符串格式，用于描述数据。JSON格式不使用标签(&lt;标签名>)，而是使用{ }和[ ]
+{  }表示对象，如：  ' { "age": 20, "name": "Tom", "birthday":"2015-5-15" } '
+[  ]表示数组，如： ' [ 10, "Tom", {"x":10, "y":20} ] '
+
+JSON字符串可以比XML更加精简，处理速度更快。
+几乎所有的编程语言都支持JSON格式。
+(1.1)PHP: 把JSON字符串解析为PHP数组  $arr = json_decode($json);
+(1.2)PHP: 把PHP数组转换为JSON字符串  $json = json_encode($arr);
+(2.1)JS: 把JSON字符串解析为JS对象  var obj = JSON.parse(jsonString);
+(2.2)JS: 把JS对象转换为JSON字符串  var jsonString = JSON.stringify(obj);
+
+JSON在项目中的实际用途：
+1)PHP数组  => JSON字符串 => HTTP响应消息 => JSON字符串 => JS对象
+2)JS对象 => JSON字符串 => HTTP请求消息 => JSON字符串 => PHP数组
+
+2.XHR接收响应消息——application/json
+  演示：点击“加载更多”按钮加载更多的菜品信息
+  服务器端（PHP）：
+header('Content-Type: application/json');
+$arr = [ [ ], [ ], [ ] ];
+$jsonString = json_encode($arr);
+echo $jsonString;
+  客户端（JS）：
+//1 //2  var obj = JSON.parse(xhr.responseText)
+//3 //4
+
+
+3.jQuery中提供的AJAX封装函数
+  (1)load( )   
+  	用法： $(选择器).load( url )
+作用：发起异步请求，获得指定URL返回的响应消息——必须是text/html格式，设置为当前选定元素的innerHTML。
+不足：(1)响应数据必须是html格式 (2)当前元素已有内容会被替换  (3)只能影响当前选定元素的内容
+
+练习：实现一个动态的下拉列表
+(2)$.get( )
+语法： $.get(url, [data], fn)
+作用：发起异步的GET请求，获得成功的响应消息后，调用指定的回调函数，处理响应主体内容
+演示：异步的分页显示
+$.get( 'xx.php', {k:v, k:v},  function(data){  } );
+练习：使用$.get()改写：注册用户名，验证用户名是否存在
+  (3)$.post( )
+语法： $.post(url, [data], fn)
+作用：发起异步的POST请求，获得成功的响应消息后，调用指定的回调函数，处理响应主体内容
+练习：成绩录入系统，使用$.post()
+		</pre>
+	</body>
+</html>

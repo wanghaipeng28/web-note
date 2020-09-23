@@ -1,0 +1,177 @@
+<html>
+	<head>
+		<title>BootStrap-Day04</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+六、插件	
+	1、boot的插件：基于jQuery和boot.js（一次性的引入了所有的js插件所需要的功能）
+		单个引入js文件
+
+	2、如何实现的插件功能
+		方式一：使用扩展属性 data-*--》优先建议使用
+		&lt;div class="dropdown">
+			&lt;a data-toggle="dropdown">&lt;/a>
+			&lt;ul>
+				&lt;li>
+
+		方式二：js 代码的方式  --》个别情况
+			$('#b1').click(function(){
+				$(this).dropdown();	
+			});
+
+
+	3、哪些插件：下拉框、导航、警告框
+		dropdown/alert---》API
+		
+	4、页签式导航
+		a、API  $().tab('show');
+		b、完整式的:带内容
+			&lt;ul
+				&lt;li class="active"
+					&lt;a href="#a1">
+					&lt;button data-target="#a1"
+
+			&lt;div class="tab-content">
+				&lt;div id="a1" class="tab-pane active">
+				&lt;div class="tab-pane">
+
+		c、过渡效果(和过渡效果相关的class）
+			fade
+			in---常用于元素的默认显示
+
+	5、折叠
+		a、基础折叠效果
+			&lt;a/button href/data-target="#d1"
+			&lt;div class="collapse" id="d1"		
+
+		b、复杂折叠：实现面板的折叠效果
+			&lt;div class="panel">
+				&lt;div class="panel-heading">
+					&lt;a href="#">
+
+				&lt;div id="" class="collapse panel-collapse">
+					&lt;div class="panel-body"
+
+
+		c、多组面板，实现互斥的折叠效果
+			&lt;div class="panel-group" id="p1">
+				&lt;div>
+					//...
+					&lt;a data-parent="#p1">&lt;/a>
+				&lt;/div>
+
+	6、tooltip--工具提示---》实现动效，必须 data-* 和 js 一起使用--》鼠标移入显示，显示title属性的值
+		&lt;元素 title="" data-toggle="tooltip" data-placement="top/left/right/bottom"
+
+		$('[data-toggle="tooltip"]').tooltip();
+
+	7、popover弹出框--》点击出现，点击消失--》出现的信息自定义的
+		&lt;元素 data-toggle="popover" data-content="点完出现的信息" data-container="body" data-placement=""
+
+		$('[data-toggle="popover"]').popover();
+
+
+	8、模态框（modal）：阻塞当前操作---》常用于关键节点
+		a、alert/confirm/prompt
+		b、原生代码：遮罩层+对话框+元素
+		c、boot中的实现方式
+			&lt;a/button 点谁
+			模态框:4层
+&lt;div ----外层
+	&lt;div ----对话框
+		&lt;div   ---用于包含具体的内容
+			&lt;div  --header
+			&lt;div  --body
+			&lt;div  --footer
+
+		d、如果关闭
+			data-dismiss = "modal"
+			js的方式
+				$('#m1').modal('show/hide');
+----》使用boot框架技术，导致页面的html代码结构复杂，借助bootlint检查，动态加载
+		s.onload = funtion(){bootlint.show...}
+
+
+	9、图片轮播
+		a、完整结构：
+			&lt;div --外层
+				&lt;div  ---主体
+				&lt;div   ----左右切换
+				&lt;div  ---序号
+
+
+七、定制（LESS）
+	0、静态样式表：CSS技术---没有编程语言的灵活，比如变量等
+		可以直接写 CSS 代码改写boot提供的样式---不方便维护
+	1、动态样式表技术（SASS/LESS/...）
+	2、LESS：编写.less文件---必须经过编译，变成CSS代码，由html文件使用
+	3、LESS语法：支持所有的 CSS 语法，基础上，可以加入一些灵活的策略（变量、嵌套、参数）
+		@mainColor:#add;
+
+		button{border:1px solid @mainColor;}
+		p{color:@mainColor}
+		ul{
+			color:;
+			.p{
+				color:;
+			}
+		}
+	4、如何使用 LESS（如何把LESS文件编译为 css文件）
+		a、客户端编译
+			页面直接引用 less 文件，同时引入 less.js文件---》由 less.js 文件负责将less文件变成css文件
+			--》服务器取回，less文件不会变成可以维护的css文件
+
+		b、手动编译：less---》css文件
+			必须安装编译环境：node.js--V8-->js的运行环境
+			包含一个组件： lessc--less的编译器
+			
+	node的环境下:包含很多模块
+	node d:/npm/node_moduel/../bin/lessc e:/1.less > e:/1.css
+
+		c、工具进行：可以lessc配置成 webstrom 的filewatcher（文件监视器）---》自动调用lessc.cmd，生成css文件
+
+	5、LESS的语法
+		a、支持变量 @name:value;
+		b、混合--》把多个样式混合在一起
+			.s1 {color:red;}  --》重用
+			.s2 {.s1;font-size:;}
+		c、带参数的混合
+			.s1(@a,@b:4px) {}
+			.s2{
+				.s1(#0f0,6px);
+			}
+		d、嵌套--》根据页面结构定义层次化的层次化的样式代码
+			.s1{
+				.s2{
+				}
+				>p{}
+				a{
+					&:hover {}
+				}
+			}
+		e、运算符和函数---》帮助手册（代码示例部分）
+			运算  @w/12
+			函数 floor()  darken/lighten()
+
+	
+		f、@import "1.less";---在一个文件中引入其他文件的代码---》分成各个小文件，根据需要选择，减少文件的大小
+情形一：index.css文件---@import "a.css";@import "b.css";
+	页面使用 index.css文件--》多次文件的下载---影响性能
+
+情形二：
+	index.less文件--@import "a.less"; @import "b.css";
+	---先被编译为 index.css文件（成型）
+	页面使用 index.css
+
+
+	6、Boot的样式源代码
+	7、定制
+		a、瘦身
+		b、修改
+		c、增加或者删除
+
+		</pre>
+	</body>
+</html>

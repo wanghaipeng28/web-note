@@ -1,0 +1,130 @@
+<html>
+	<head>
+		<title>jQuery-Day04</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+复习：        jQLite 、 Zepto
+jQuery是一个JS函数库，用于简化DOM操作。包括下列函数：
+(1)查找节点   $(选择器)
+(2)操作节点
+属性：
+内容：
+样式：
+增加：
+删除：
+替换：
+克隆：
+遍历：
+(3)事件处理
+bind()/one()
+click()/mouseover()...
+$(parent).delegate('子元素选择器', '类型', fn)
+$(target).live('类型', fn)
+$(target).on('类型', fn)
+$(parent).on('类型','子元素选择器', fn)
+(4)动画
+show()/hide()/toggle()
+slideUp()/slideDown/slideToggle()
+fadeIn()/fadeOut()/fadeToggle()
+animate({ 大小/位置/边框宽度/透明度 }, 2000, fn)
+(5)AJAX封装
+
+ES核心对象：String Date Math ...
+NodeJS对象： ES核心对象 + N百个扩展对象
+
+1.jQuery的扩展——jQuery插件函数
+  (1)jQuery官方插件函数——jQueryUI
+  (2)第三方提供的插件函数
+  (3)如何自己编写一个插件函数
+
+
+2.jQueryUI函数库
+ UI：User Interface
+ UI库/HTML组件库：使用HTML/CSS/JS实现的特殊的页面功能效果的集合。
+ jQueryUI是一个基于jQuery而编写的一套HTML组件库，通常用于PC浏览的网页。
+ 官网：http://jqueryui.com/
+ 手册：http://api.jqueryui.com/
+提供的组件库分为三部分：
+(1)Effects： 动画特效
+(2)Interactions：交互组件
+(3)Widgets：小部件
+
+3.jQueryUI组件之第一部分：Effects
+ jQueryUI为jQuery动画函数添加了更加丰富的动画特效，如颜色动画、爆炸/弹跳/滑动特效、速度函数....
+ 这些动画特效对jQuery的如下函数进行了动画特效扩展：
+(1)animate( )  添加了颜色相关动画
+(2)addClass( ) / removeClass( ) / toggleClass( )
+(3)show( ) / hide( ) / toggle( )
+注意：上述动画特效扩展底层仍然是使用定时器，不能与CSS Transition组合应用。
+
+新的动画特效：
+  blind(遮蔽)  bounce(弹跳)  clip(缩短)  drop(丢弃)  explode(爆炸)  fold(折叠)  highlight(高亮)  puff(膨胀)  pulsate(心跳)  scale  shake(震动)  size  slide
+
+练习：输入框获得焦点后边框颜色/阴影颜色发生渐变，失去焦点后变回原样
+
+
+
+4.jQueryUI组件之第二部分：Interactions(交互组件)
+  (1)$(..).draggable( )	目标元素可拖拽
+  (2)$(..).droppable( )	目标元素可放置
+  (3)$(..).resizable( )	目标元素可重设大小
+  (4)$(..).selectable( )    目标元素可选中		
+  (5)$(..).sortable( )	  	目标元素可排序
+提示：由于上述5个函数对HTML代码有“侵入性”——添加class或必需相关元素，使用时必需同时引入 jquery-ui.css，且有时还必须手工添加样式。
+
+5.jQueryUI组件之第三部分：Widgets(小部件)——今日小重点
+提示：jQueryUI总共提供了12个Widgets，每一个使用起来都很简单，但都有“侵入性”——为已有的元素添加class或子元素，需要手工引入jquery-ui.css。
+ (1)手风琴组件
+$(..).accordion( )
+ (2)自动补全组件
+$('input').autocomplete( {  source: ['','','']  } );
+ (3)日期选择器组件
+$('input').datepicker( {dateFormat: 'yy-mm-dd'} );
+ (4)弹出式对话框组件
+$('div').dialog( );
+ (5)标签页组件(tabs)
+$('div').tabs( );
+ (6)工具提示组件(tooltip)
+$(document).tooltip( );  对所有的title属性改变外观
+
+HTML5规范中与无障碍阅读相关的属性：
+  role="元素的角色"
+  aria-*=""
+
+
+6.第三方JS插件——日期选择器插件
+  百度搜“日期插件”可以很多的结果，如：
+  jQueryUI Datepicker
+  My97
+  layDate(http://laydate.layui.com/)
+
+7.第三方插件——轮播广告插件
+  百度搜“轮播广告”可以很多的结果，如：
+  .....
+  .....
+
+8.第三方插件——表单验证插件
+  百度搜“表单验证插件”可以很多的结果，如：
+  	formValidator
+easyForm
+validate.js
+jQuery.validate(https://jqueryvalidation.org/)
+
+
+
+
+
+1602A班：练习内容 - 使用jQuery和jQueryUI操作购物车
+功能点要求：
+(1)使用jQuery控制表格主体的隔行变色 $('tbody tr:nth-child(2n)')
+(2)使用jQuery控制表格主体的悬停变色  $('tr').hover(fn, fn)  addClass
+(3)点击X号，可以从表格主体中删除当前行  $(this).parent().parent().remove()
+(4)使用jQueryUI的Spinner组件修改商品数量  $(input).spinner()
+(5)每个商品数量的改变，都要影响当前商品的小计及总计
+$(input).blur()   $(this).parent().next().html()
+$('.小计').each( fn )
+		</pre>
+	</body>
+</html>

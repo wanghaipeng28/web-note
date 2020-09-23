@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>HTML5-Day06</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+3.HTML5新特性——Geolocation——了解
+ 地理定位，使用浏览器获得客户端所在的地理坐标，如维度(latitude)、经度(longitude)、海拔高度(altitude)、速度(speed)。进而实现LBS（Location Based Service）。
+  PC浏览器：一般没有定位模块，只能使用IP地址进行反向解析，获取大概地理定位数据，精度很低。
+  手机浏览器：内置的定位模块，手机浏览器可以从底层的操作系统读取到相应的数据——推荐PhoneGap直接读取底层操作系统的数据。
+
+  HTML5针对地理定位提供的新对象：
+navigator.geolocation，它共有三个方法：
+(1)getCurrentPosition(succ_fn, err_fn) 得到浏览器当前所在位置数据
+(2)watchPosition(function(position){}) 不停的监视当前浏览器所在位置数据的变化
+(3)clearWatch() 清除位置监视
+
+4.调用百度提供的地图开放API
+	官网：http://lbsyun.baidu.com/
+	API说明文档（使用手册）：
+	http://lbsyun.baidu.com/index.php?title=jspopular
+	(1)注册/并登录百度开发者账号
+	http://developer.baidu.com
+	(2)创建一个Web应用
+	(3)创建HTML页面，使用JS访问百度提供的地图API
+5.HTML5新特性——拖放API（Drag & Drop）
+	 拖放API：在HTML页面中实现GUI（Graphic User Interface）程序中的“拖”和“放”操作。共提供了七个新事件。
+	 被拖动的对象（源对象）可以产生的事件：
+	 (1)ondragstart：开始拖动
+	 (2)ondrag：拖动中
+	 (3)ondragend：拖动结束
+  被放置的对象（目标对象）可以产生的事件：
+	 (4)ondragenter：源对象被拖动进入目标对象
+	 (5)ondragover：源对象被拖动着在目标对象的上方
+	 (6)ondrop：源对象被拖动着在目标对象上方松开
+	 (7)ondragleave：源对象被拖动移出目标对象
+	注意：ondragover事件的默认后续事件必须是ondragleave——即使是松手，也不触发ondrop！只有在ondragover中阻止该默认事件，才有可能触发ondrop！！
+	target.ondragover = function(event){
+	event.preventDefault();  
+	....
+	}
+		</pre>
+	</body>
+</html>

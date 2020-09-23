@@ -1,0 +1,162 @@
+<html>
+	<head>
+		<title>AngularJS-Day05</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1 回顾
+	框架：优秀的可以重复使用的代码，单独提取封装，供重复使用。完成复杂的功能
+	，提高代码的质量，提高开发的速度，帮助我们解决浏览器兼容等的问题。
+
+	angularJS jqm extJS 微信：
+	学习框架，不再只是记忆，而是理解 动手查阅和编写的能力。
+
+2 AngularJS http://angular.cn
+
+	是一款基于MVC设计模式的JS框架，是基于JS封装的。
+	用在哪些场景？创建SPA（single page application）应用
+
+3.设计原则和设计模式
+
+	拙劣的设计：
+	僵化性、脆弱性、不必要的重复、不必要的复杂性、晦涩性
+
+	前辈们给我们提供了反复使用的经验：
+	它可以提高代码的可重用行，增强系统的可维护性，以及解决一些列复杂的问题。
+	就是设计原则和模式
+
+	设计原则之简单认识：
+		1、 YAGNI 不写不需要的代码
+		2、KISS keep it simple and stupid 
+		代码越简单越好（!().a），保持代码的简介和一目了然（傻瓜式）
+		3、DRY don't repeat yourself 使用封装和重用
+		4、高内聚 低耦合(HCLC)
+		High Cohesion Low Coupling
+		聚合：一个组件内的不同部分之间的关系
+		耦合：两个组件间的关系
+		class Driver(Car car)						class Car（）
+		{
+
+		start();
+		run();
+		stop();
+		}
+5、SRP（Single Responsibility Principle）
+	单一责任的原则：模块具有独立性，a模块出问题，不影响其他模块
+
+	&lt;div class='col-xs-6 text-left'>
+	&lt;/div>
+
+
+
+
+	&lt;div class='col-xs-6'>
+	 &lt;div class='text-left'>
+	fdsjguiosa 
+	&lt;/div>
+	&lt;/div>
+
+6、OCP （Open Closed Principle）
+	对扩展开放，对于修改关闭
+	Open chest surgery is not needed when putting on a coat
+	代码可供别人进一步使用，但是不能被修改
+
+7、LKP/LCP 最少知识法则
+	封装的功能单位要小，只与自己有关。
+	Dont't talk to Strangers.
+
+设计模式：
+23种设计模式+MVC模式
+
+	M：Model 业务数据（模型数据），对数据封装和定义。比如商品、订单、用户等
+	V： View 视图，业务数据的表现，由HTML来表示，
+	C:  Controller 控制器，负责控制数据的获取、删除更新等
+
+为什么需要MVC？
+	1、代码规模越来越大，要求切分责任，这是大势所趋。
+	2、为了复用，很多逻辑是一样的。
+	3、为了后期维护方便，修改一块功能不要影响其他功能。
+
+MVC也好，现在流行的其他MV*框架也好，不是目的，只是一种手段，
+终极目标都是让程序能够模块化和复用。
+
+
+AngularJS的学习（ng）
+	09年发布，后被Google收购，是一个JS框架，适用于以数据操作为主的SPA应用，
+	实现数据的增删改查（CRUD）
+
+	AngularJS四大特征：
+	1、使用MVC模式
+	2、双向数据绑定
+	3、依赖注入
+	4、模块化设计
+
+
+
+第一个AngularJS程序：
+
+	表达式：
+	ng表达式是由数据变量和运算符构成，可用于在HTML中执行运行算。
+	语法: {{ 表达式 }}
+	算数运算：加减乘除都没有问题，自增自减是不可以的
+
+
+	&lt;!--比较运算-->
+
+	&lt;!--逻辑运算-->
+
+	&lt;!--三目运算-->
+
+
+指令：
+	AngularJS中有作用域（控制范围）概念，在网页中，可以指定哪一块是ng的地盘，这个
+	范围，叫做AngularJS应用程序。
+
+ng-app指令:
+	用途：指定AngularJS应用范围/作用域
+	语法:&lt;ANY ng-app="">  &lt;/ANY>
+
+ng-init指令：
+	用途：初始化ng应用程序的模型数据
+	语法：&lt;ANY ng-init="赋值表达式">&lt;/ANY>
+
+ng-bind 指令
+	用途：将指定的表达式的值 输出到当前元素的innerHTML
+	用法：&lt;ANY ng-bind="">&lt;/ANY>
+
+
+
+
+ng-repeat指令
+	用途：为HTML添加循环功能.对于指定的对象或者数组的每个成员，
+	一次赋值给临时变量，将HTML元素循环输出一遍。
+
+	用法：&lt;ANY ng-repeat="临时变量名 in 集合或者对象">&lt;/ANY>
+
+ng-if指令
+	用途:当表达式为true时，当前元素会挂到DOM树上，
+	否则会删除
+	用法：&lt;ANY ng-if='表达式'>&lt;/ANY>
+
+
+MVC模型：
+	Model：模型，表示数据，在AngularJS当中由JS变量来担当（$scope）
+
+View:视图，表示HTML加上ng指令，用于显示数据，在AngularJS
+	由HTML来担当
+
+Controller：控制器，负责数据的增删改查，在AngularJS当中由
+	function来担当。
+
+由案例总结AngularJS MVC的创建使用步骤：
+	1、创建一个模块('myApp')，使用ngApp指令确定该模块的作用范围，
+	注册：angular.module('myApp',[])
+	2、在模块当中声明一个控制器组件：通过模块的controller('myCtr',func)
+	使用ngController来指定的时候，我们要使用同一个名称（模块也是一样的道理）
+
+	3、为控制器注入$scope对象，声明模型数据，将数据声明为$scope的属性
+	4、在视图中绑定模型数据，进行呈现，使用{{}}也可以使用其他
+		</pre>
+	</body>
+</html>

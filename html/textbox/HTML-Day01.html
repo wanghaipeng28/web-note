@@ -1,0 +1,377 @@
+<html>
+	<head>
+		<title>HTML-Day01</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+赵旭
+zhaoxu@tedu.cn
+QQ:948227958
+
+
+WEB前端 ：
+   WEB : 网页
+   前端 ：界面、速度
+
+设计型WEB前端
+开发型WEB前端
+
+第一阶段 ：基础
+   HTML + CSS + Javascript
+
+   HTML5Basic（基础）
+   CSS3Basic（基础）
+   WEB UI
+   CSS3Core（核心）
+   JavascriptBasic（基础）
+
+开发型WEB前端 ：
+   第二阶段：
+      Javascript
+   第三阶段：
+      jQuery 框架
+      HTML5Core(核心)
+      服务器端
+      Ajax
+   第四阶段：
+      Bootstrap ：ＣＳＳ框架
+      AngularJS : JS框架 
+      微信开发
+
+
+设计型WEB前端：
+    第二阶段：
+       WEB UI :设计网页 + 实现 
+    第三阶段：
+       Javascript
+    第四阶段：
+       HTML5Core
+       Ajax
+       jQuery
+       Bootstrap
+       微信开发
+
+学习方法：
+    练：写代码
+
+    背：
+        背效果
+	背单词
+
+
+1、WEB 与 Internet
+   1、Internet
+      因特网、互联网
+
+      主要服务:
+      WWW,BBS(电子公告板，论坛),Email...Telnet,FTP
+
+      目标：信息共享
+
+      实现技术：
+        分组交换原理：
+	TCP/IP协议 
+   2、WEB 
+      1、什么是WEB
+         WEB就是 Internet 上面的一种 网页 应用程序
+
+	 将 各种服务 与 信息进行连接，并且提供了生动的图形用户界面
+      2、WEB的工作原理
+         1、基于 B/S 结构的模式
+	    B/S :
+	        B : Browser , 浏览器
+		S : Server , 服务器
+		通过 浏览器去访问服务器的一种模式，都称为BS结构模式
+	    C/S :
+	        C ：Client , 客户端
+		S ：Server , 服务器
+		必须荣国 指定的客户端 才能访问的服务器的一种程序或模式，统称为 CS结构模式
+		代表：QQ
+	 2、WEB的组成
+	    由 WEB服务器(Server)、浏览器(Browser)、通信协议(HTTP协议)
+	    HTTP:Hyper Text Transfer Protocol
+	         超级  文本 传输     协议
+		 规定了 数据是如何打包的以及数据在互联网上是如何传递的。
+            服务器：
+	       PC ：不是服务器，Personal Computer(个人计算机)
+	       Server : 硬件强悍
+	 3、浏览器与服务器
+	    1、服务器
+	       主要功能：
+	         存储web页面，提供托管环境
+		 响应浏览器的请求，执行服务器端程序
+	       主流的服务器软件：
+	         TOMCAT : Apache
+		 IIS ：微软
+		 APACHE : Apache
+	    2、浏览器
+	       主要功能：
+	         User Agent : UA,用户代理
+
+		 提交用户请求
+		 解释 HTML代码 和 脚本程序
+		 使用图形化方式显示内容
+	       浏览器产品：
+	         Chrome : Google
+		 IE : Microsoft
+		 Opera : 欧朋
+		 Safari ： Apple
+		 Firefox : Mizilla
+	 4、WEB相关技术
+	    1、服务器端技术
+	       只能运行在服务器端
+	       所有的服务器端技术都提供了数据库访问能力
+
+	       php
+	       jsp : Java Server Page
+	       asp : Active Server Page
+	       aspx : ASP.NET
+	    2、客户端(浏览器)技术
+	       运行与客户端，由浏览器解释运行
+
+	       HTML
+	       CSS
+	       Javascript
+
+2、HTML快速入门
+   1、HTML概述
+      HTML：Hyper Text Markup Language
+            超级  文本 标记   语言
+      html文件 以 .html 或 .htm 作为结尾的
+   2、HTML 基本语法
+      1、标记语法
+         1、什么是标记
+	    在HTML中，用于描述功能的符号，称为标记,不同标记具备不同的功能
+	 2、标记的组成
+	    由 &lt; > 组成
+
+	    &lt;标记名称> : &lt;a> &lt;b> &lt;br>
+	 3、标记的类型
+	    标记分成2大类：
+	    1、封闭类型标记
+	       有开始，也有显示的结束的标记，称为封闭类型标记，也叫 "双标记"
+	       语法：
+	         &lt;标记名称>内容&lt;/标记名称>
+		 &lt;a>&lt;/a> : 超链接
+		 &lt;b>&lt;/b> : 加粗
+		 &lt;div>&lt;/div>
+	       注意：内容， 是受标记的样式控制的。
+	    2、非封闭类型标记
+	       有开始，可以没有结束。自己既可以表示开始也可以表示结束。也称为 空标记 或 单标记
+	       语法：&lt;标记名称> 或 &lt;标记名称/>
+	       注意：单标记 本身 就是一段独立的功能
+	         &lt;br> : 换行
+		 &lt;hr> : 水平线
+		 &lt;img> : 图片
+      2、元素
+         就是标记
+
+	 从开始标记 开始 到 结束标记 之间的所有内容，都统称为元素
+	 &lt;a href="http://www.baidu.com">百度&lt;/a>
+
+	 元素：标记、属性、内容
+
+
+	 1、元素嵌套
+	    在一个元素内部 又增加了另外一个元素
+	    一个html页面 就是由各种各样的 嵌套元素所组成的
+	    语法：
+	       &lt;标记1>
+	         &lt;标记2>&lt;/标记2>
+	       &lt;/标记1>
+	    注意：
+	       1、嵌套顺序
+	          一定要完整嵌套
+		  &lt;div>
+		    &lt;p>&lt;/p>
+		  &lt;/div>  正确
+
+		  &lt;div>
+		     &lt;p>
+		       fdsafdsafdsa
+		  &lt;/div>
+		  &lt;/p>   错误
+	       2、代码缩进
+	          嵌套代码中，子级元素前，要通过几个空格来表示层级关系
+
+		  &lt;div>
+		     &lt;p>&lt;/p>
+		  &lt;/div>
+
+		  嵌套标记写法：
+		  1、开始 结束 一起写
+		     &lt;div>
+			&lt;p>
+				&lt;a>&lt;/a>
+			&lt;/p>
+		     &lt;/div>
+       3、属性 和 值
+          属性 ：修饰元素不同显示效果的内容
+	  值：最终，确定显示的效果的内容
+
+	  属性 只能 声明在开始标记中 ，并且 属性 与 标记名称 中间用 空格分开
+	  语法：&lt;标记 属性>&lt;/标记>
+	  在一个元素中，属性可以有过个，多个属性间用空格区分，并且排名不分先后
+	  语法：&lt;标记 属性1 属性2 属性3>&lt;/标记>
+
+	  属性与值：
+	    属性 和 值 用  =  关联
+	    语法 &lt;标记 属性1="值" 属性2='值'>&lt;/标记>
+	         &lt;p id="p1" align="center">&lt;/p>
+	  标准属性：
+	     所有的元素都具备的属性
+	     id : 标识元素在页面中的唯一名称
+	     title : 鼠标移入到元素上时，所提示的文本内容
+	     class : 定义元素的 类样式(与CSS相关)
+	     style : 定义元素的 内联样式 (与CSS相关)
+       4、html 注释
+          标识 内容 不会被浏览器解释运行。
+	  通常会将 对代码的解释说明 放在注释中
+
+	  语法：&lt;!-- 被注释的内容 -->
+	  注意：
+	     1、注释不能嵌套注释
+	        &lt;!--
+		    &lt;!-- -->
+		  -->
+
+		  错误
+	      2、注释不能写在标签内
+                 &lt;div&lt;!-- -->>&lt;/div>
+		 错误
+       5、HTML版本
+          
+	  HTML2.0
+	  HTML3.0
+	  HTML4.01 1999 12 24 发布
+	  XHTML1.0 2000 1  26 发布
+
+	  HTML4.01 
+	     &lt;div align=center>&lt;/div>
+	  XHTML1.0
+	     &lt;div align="center">&lt;/div>
+
+	  HTML4.01
+	     &lt;br>
+	  XHTML1.0
+	     &lt;br/>
+	  
+	  HTML5 : H5
+	   目标：让代码更简洁
+	   1、所有的单标记可以不加 / 
+	      &lt;br> &lt;br/>
+	   2、某些特定的属性 可以不给值
+
+	      disabled
+	      checked
+	      selected
+	      readonly
+3、html文档结构
+   1、文档类型声明
+      用于指定 html 文档的风格和版本
+      html5 : 
+      &lt;!doctype html>
+
+      出现在整个 html 文档 最顶层
+   2、html页面
+      位置：&lt;!doctype html>之下
+      数量：有且仅有一个
+
+      标签：&lt;html>&lt;/html>
+
+      html页面包含两大部分：
+      1、网页头部
+         负责定义网页的全局信息
+	 标签：&lt;head>&lt;/head>
+
+	 网页头部允许包含以下内容：
+	 1、&lt;title>&lt;/title> --标题
+	 2、&lt;meta/>  --定义页面元数据(编码、关键字、描述 ...)
+
+	 3、&lt;script>&lt;/script> -- 定义/引入Javascript
+	 4、&lt;link /> -- 引入外部 CSS 样式表
+	 5、&lt;style>&lt;/style> -- 定义内部样式表
+      2、网页主体
+         标签：&lt;body>&lt;/body>
+	 作用：定义网页的主体，所有的显示内容，都要放在body中
+4、文本标记
+   1、特殊字符
+      需求： 页面中打印输出 &lt;p>&lt;/p>
+
+      注意：
+         1、html中 ， &lt;> 不能随意输出
+	 2、页面中无论出现多少个 回车 和 空格 ，最终都被解释成 1 个空格
+      解决方案：
+         靠 "转义字符" 解决这些特殊的效果
+      转义字符： 
+         &lt;  &lt;
+	 &gt;  >
+	 &nbsp;  空格
+
+	 &copy; ©
+	 &yen; ￥ 
+
+   2、文本标记
+      1、文本样式
+         能够改变文本的显示效果的标记
+	 &lt;b>&lt;/b> : 加粗
+	 &lt;i>&lt;/i> : 斜体
+	 &lt;u>&lt;/u> : 下划线
+	 &lt;s>&lt;/s> : 删除线
+	 &lt;sub>&lt;/sub> : 下标
+	 &lt;sup>&lt;/sup> : 上标
+      2、标题元素
+         通过改变文字的 大小 和 加粗 方式 来呈现文本的显示效果，主要作用为 突出 显示文字
+	 &lt;hn>&lt;/hn> n:1~6
+
+	 一级标题 字最大，六级标题 字最小
+      3、段落元素
+         突出显示文本 为段落，表现形式为 上下会具备 垂直的空白
+	 &lt;p>&lt;/p>
+      4、换行元素
+         效果等同于 回车的效果
+	 &lt;br> 或 &lt;br/>
+
+
+	 CV大法:
+	   Ctrl + C : 复制
+	   Ctrl + V : 粘贴
+      5、分区元素
+         1、行内分区元素
+	    &lt;span>&lt;/span>
+	    作用：自定义显示效果
+	 2、块分区元素
+	    &lt;div>&lt;/div>
+	    作用：布局
+      6、分割线元素
+         作用：在页面 绘制一条 水平线
+	 &lt;hr>
+	 注意：水平线的前后内容会换行显示
+	 属性：
+	    size：高度
+	    width：宽度
+	    color : 颜色
+	    align : 线条的水平对齐方式
+	       取值：left(左) center(中) right(右)
+      7、预格式化
+         作用：保留 源文档中的格式（回车 和 空格）
+	 &lt;pre>&lt;/pre>
+
+      8、行内元素 与 块级元素
+         1、行内元素：
+	    多个元素会在同一行内显示
+	    &lt;b>&lt;/b>
+	    &lt;s>&lt;/s>
+	    &lt;u>&lt;/u>
+	    ....
+
+	    &lt;span>&lt;/span>
+
+	    作用：修饰文本的不同表现形式
+	 2、块级元素
+	    默认情况下，块级元素会独占一行(宽度 100% )，块级元素的前后 都会自动换行
+	    作用：布局
+		</pre>
+	</body>
+</html>

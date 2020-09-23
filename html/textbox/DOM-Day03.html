@@ -1,0 +1,122 @@
+<html>
+	<head>
+		<title>DOM-Day03</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+正课:
+1. 创建和删除
+2. HTML DOM常用对象: Select  Table   Form
+
+1. 创建和删除：
+   1. 创建: 3步:   
+      Step1. 创建空元素对象:
+	var elem=document.createElement("标签名")
+        相当于: &lt;标签名>&lt;/标签名>
+      Step2. 为空元素添加关键属性
+        elem.属性名="值"
+        elem.innerHTML="内容"
+        相当于: &lt;标签名 属性名="值">内容&lt;/标签名>
+      Step3. 将新元素挂到DOM树中指定父元素下
+        追加: parent.appendChild(elem)
+        插入: parent.insertBefore(elem,现有元素)
+        替换: parent.replaceChild(elem,现有元素)
+
+   2. 删除: parent.removeChild(elem)
+
+网页加载过程:
+获得HTML内容->构建DOM Tree
+                  |
+               将CSSRules附加到DOM Tree-*layout*-paint
+                  |
+获得CSS内容->构建COM(CSSRules)
+   layout: 重新计算布局——效率低
+        只要改变DOM树上的元素，都会重新layout——效率更低
+   如何减少layout的次数：先在内存中拼凑要添加的DOM子树
+                         然后一次性挂到页面
+                         只会触发一次layout——效率提高
+
+     课堂练习: 
+       select: 事件: onchange, 当选中项发生改变时触发
+               属性: selectedIndex：获得当前选中项的下标
+
+    3. 文档片段: 内存中临时存储一个DOM子树的临时父节点
+	用法和普通父节点完全一样
+        可将DOM子树整体挂到DOM树上，但自己不出现在DOM中
+        何时使用: 同时添加多个平级元素时，都要先放在文档片段中，再将文档片段整体挂到页面
+        如何使用: 3步: 
+          Step1: 创建文档片段对象：
+	   var frag=document.createDocumentFragment();
+          Step2: 将平级子元素，追加到文档片段中
+	   frag.appendChild(elem)
+          Step3: 将文档片段挂到DOM树上指定父节点下
+           parent.appendChild(frag);
+
+2. HTML DOM常用对象:
+   Select对象: 指代一个select元素
+     属性: options: 包含一个select下所有option元素对象的集合
+        selectedIndex: 获得当前选中项的下标
+     方法: add(opt): 将opt元素对象追加到当前sel下
+           remove(i): 移除sel下下标为i的option元素对象
+     事件: onchange: 
+
+   Option对象: 指代select元素下一个option元素
+     创建Option: var opt=new Option(innerHTML,value)
+            相当于核心DOM: 
+                 var opt=document.createElement("option");
+                 opt.innerHTML=innerHTML;
+                 opt.value=value;
+       简写： 创建，设置，并追加option:
+         sel.add(new Option(innerHTML,value));
+     属性: index: 当前option元素在select中的下标位置
+           selected: 返回当前option是否被选中，返回bool值
+
+   Table对象: 指代一个table元素
+     创建: createTHead/TBody/TFoot 
+	返回刚创建的对象，用于继续添加子内容
+     删除: deleteTHead/TFoot
+     获取: .tHead/tFoot  .tBodies[i]
+      tHead
+	添加: .insertRow(i)，如果省略i，表示在最后一行追加
+               如果i在中间，就在i位置插入，原i位置的行向后顺移
+               返回刚创建的对象，用于继续添加子内容
+        删除: .deleteRow(i), 如果省略i，表示删除第一行
+        获取: .rows[i]
+	tr
+	    添加: .insertCell(i),省略i表示末尾追加
+            删除: .deleteCell(i),省略i删除第一个
+            获取: .cells[i]
+	    td
+      tBodies
+	tBody
+	  tr
+             td
+      tFoot
+	tr
+	    td
+
+   table.insertRow()
+    看最后一个tr所在的行分组是哪个，就将新tr追加到哪个行分组内
+   table.deleteRow(),永远删除全表的第一行
+   table.deleteRow(i),删除相对于全表的下标为i的行
+   tBody.deleteRow(i),删除当前tBody内下标为i的行
+
+   tr.rowIndex: 表示tr相对于整个表的下标位置
+      几乎专用于deleteRow
+
+3. Form对象: 专门指代一个form元素
+    获取form对象: var form=document.forms[i/name];
+    获取form元素下的表单控件: 
+        var elem=form.elements[i/name]
+        其中: elements仅包含所有输入控件和按钮
+	其实可以更简单: form.name
+  
+    方法: form.submit();//手动提交表单
+          何时使用: 不希望自动提交时，可使用自定义按钮调用form的submit方法，手动提交
+
+         elem.focus();//让当前elem元素获得焦点
+         elem.blur();//让elem失去焦点，但很少主动使用
+		</pre>
+	</body>
+</html>

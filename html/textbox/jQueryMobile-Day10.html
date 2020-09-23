@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<title>jQueryMobile-Day10</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+
+	将导航条（navbar）放到页头、页尾里。
+	放在页尾时候，如果设置过图标（data-icon=''）,图标在上方。
+三、listview
+	给ul/ol指定data-role=listview
+
+	data-inset
+	data-filter='true/false'
+
+	list divider:
+
+	data-role='list-divider'
+	data-autodividers='true'
+
+	listview:
+	搜索 data-filter
+	分隔行 (1 li data-role=list-divider 2\ data-autodividers)
+
+	5mins（。。-11:46）
+	参考手册，实现消息提醒
+
+四、折叠组件
+	data-role="collapsible"
+	放置一个h标签，正文可以段落任意的标签。
+	data-collapsed="false"
+	在页面加载进来之后，将折叠组件展开
+	data-collapsed-icon 修改折叠时图标
+	data-expanded-icon 展开时图标
+	data-role='collapsibleset'
+	实现折叠组件集合（或者手风琴组件）
+	5分钟
+	尝试着实现改变折叠组件的
+	头部以及正文的主题。
+
+
+五、表格（回流式表格、列切换式表格）
+
+	回流式表格：
+
+	data-role='table'
+	data-mode='columntoggle/reflow'
+
+	data-priority="1/2/3/4/5/6"
+	1是优先级最高的 6是最低的。
+	在窗口缩小时，优先级最低的会被首先隐藏掉。
+	点击右上角按钮，弹窗（复选框列表）
+
+	要求：
+	（10分钟  15：45）
+	实现一个列切换式表格，放置4列，要求在视图缩小时，第一列被首先隐藏掉。
+
+
+	data-role='fieldcontain'
+
+
+六、jqm事件
+	http://api.jquerymobile.com/category/events/
+
+	-----触摸----
+	tap  单击
+	taphold 长按
+	swipe 滑动事件
+	swipeleft  左滑动
+	swiperight 右滑动
+
+	----滚动----
+	scrollstart
+	scrollstop
+
+	----其他----
+	originationchange
+	pagehide
+	pageshow
+	...
+		</pre>
+	</body>
+</html>

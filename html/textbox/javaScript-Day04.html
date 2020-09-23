@@ -1,0 +1,154 @@
+<html>
+	<head>
+		<title>Day04</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;background-color:#B5D7B5;font-size:20pt;padding-top:50px;">
+			回顾:
+			1. ***数组API
+			   1. 转字符串: 
+				  String(arr): 输出元素的内容，用逗号分隔每个元素
+				  arr.join("分隔符"): 输出元素的内容，可自定义分隔符
+			   2. 拼接和截取: 都不修改原数组，只能返回新数组
+				  1. 拼接: var newArr=arr1.concat(值1,值2,arr2,值3,...);
+				  2. 截取: var subArr=arr.slice(starti,endi+1);
+				说明: 1. 如果希望截取到结尾，就可省略第二个参数
+						  2. slice支持负数参数(倒数下标)
+			   3. splice: 
+				  1. 删除: var deleted=arr.splice(starti,n);
+				  2. 插入: arr.splice(starti,0,值1,值2,...)
+				   强调:splice不会自动打散参数中的数组
+				  3. 替换: var deleted=arr.splice(starti,n,值1,值2,...)
+			   4. 颠倒: arr.reverse();
+
+			正课: 
+			1. ***数组:
+			   排序
+			   栈和队列
+			   二维数组
+			2. ***String
+
+			1. ***数组:
+			   排序: 
+				 自定义排序算法: 冒泡排序（手写）
+				 排序API: arr.sort(); 
+						意为: 将arr中元素按升序排列
+						强调: 默认将每个元素都转为字符串，PK unicode号
+						何时使用默认排序: 只有排序字符串类型的元素时
+				   如果排序除字符串外的其他类型就要自定义比较逻辑！
+				 自定义比较逻辑: 
+				   2步: 1. 定义比较器函数：
+						  什么是: 专门比较任意两值大小的函数
+							要求: 一定有2个参数: a,b
+								  返回值: 如果a>b，就返回正数
+										  如果a&lt;b，就返回负数
+										  如果a==b，就返回0
+						  如何使用: function compare(a,b){
+								return a-b;
+									}
+						2. 将比较器函数作为参数传入sort函数中
+						   arr.sort(比较器函数名)
+			   降序排列: 颠倒比较器函数返回值的正负，可改升序为降序
+				   function compare(a,b){return -(a-b);}
+
+
+
+
+
+			正课:
+			1. ***数组
+			   栈和队列
+			   二维数组
+			2. ***String
+
+			1. ***数组:
+			   栈(stack)和队列(queue): 
+				其实都是普通数组，只不过调用了不同API而已
+			   栈: 一端封闭，只能从另一端进出的数组
+				FILO
+				何时使用: 希望始终使用最新进入数组的元素时
+				如何使用: 
+				   1. 从结尾出入栈
+				  入栈(压栈): arr.push(值1,值2,...)
+					 不支持数组参数
+					  出栈(弹栈): var last=arr.pop();
+					  好处: 无论出入栈都不改变剩余元素的位置
+				   2. 从开头出入栈
+				  入栈: arr.unshift(值1,值2,...)
+					 unshift入栈的顺序值从右向左读取参数
+					  出栈: var first=arr.shift();
+					  缺点: 每次出入栈都会导致其余元素的位置改变
+
+				队列: 从结尾进入，从开头出的数组
+				  FIFO
+				  何时使用: 希望按照先来后到的顺序依次使用元素时
+				   1. 入队列(排队): arr.push();
+				   2. 出队列: var first=arr.shift();
+
+				二维数组: 数组中的元素，又引用另一个子数组
+				  何时使用: 1. 要存储的数据就是横行竖列的二维数据时
+							2. 如果多个数据需要分类存储时
+				  如何使用: 
+					 创建: 2步: 
+					   1. 创建空数组
+					  var data=[];
+					   2. 向数组中添加新元素，新元素再赋值为一个子数组
+						  data[0]=[8,4,4,2]
+						  data[1]=[4,16,8,4]
+					   也可在创建同时初始化子数组: 
+						  data=[
+							  [8,4,4,2],
+							  [4,16,8,4]
+						  ]
+				  访问数组中的元素: 
+					  arr[r] --> 获得下标为r位置的子数组
+					  arr[r][c] --> 获得r行c列位置的元素
+									单个元素的用法和普通变量完全一样
+					强调: 越界: r不越界，c越界，返回undefined
+								r越界，报错
+				  遍历: for(var r=0;r&lt;arr.length;r++){
+					for(var c=0;c&lt;arr[r].length;c++){
+						arr[r][c]//当前元素
+					}
+						}
+
+			2. ***String: 
+			   内置对象: ES标准中规定的，浏览器厂商已经实现的API
+			   11个: String Number Boolean ->包装类型
+					 Array Date Math RegExp
+					 Error
+					 Function Object
+					 Global（window）
+			   包装类型: 专门封装原始类型的值，并提供操作值得API 的对象
+			   为什么: 原始类型的值不能拥有属性和方法
+					   但是实际开发中需要对原始类型值反复执行相同操作
+			   如何使用: 自动创建和调用
+				 生命周期: 
+				创建: 试图用原始类型的值调用函数时，自动创建对应类型的包装类型对象。
+					  其实调用的是包装类型对象的函数。
+					释放: 调用完函数后，自动释放！
+					  
+			   什么字符串: 一串字符组成的只读数组
+				   相同: 1. 用[i]方式访问每个字符
+						 2. 都有length属性记录字符个数
+						 3. 都可用slice截取子字符串
+						 4. 都用for遍历每个字符
+			   String API: 所有API都不直接修改原字符串，只能返回新字符串
+			   1. 转义字符: 将字符串内容中和语法冲突的特殊符号转为普通字符
+					 比如: \" \' \\
+							在字符串中代替空字符: \n 换行  \t制表符
+			   2. 大小写转换: 
+				  何时使用: 不区分大小写时，都要先转为统一的大小写，再比较
+				  如何转换: 
+					  str=str.toUpperCase();
+					  str=str.toLowerCase();
+			   3. 获取指定位置的字符: 
+					  var char=str.charAt(i); =>str[i]
+					  var unicode=str.charCodeAt(i);
+						  获得str中i位置字符的unicode号
+
+
+		</pre>
+	</body>
+</html>

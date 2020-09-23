@@ -1,0 +1,187 @@
+<html>
+	<head>
+		<title>jQuery-Day01</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+阶段1：  HTML + CSS
+阶段2：  JS + DOM
+阶段3：  jQuery + AJAX + H5新特性
+阶段4：  CSS/JS框架
+
+
+1.W3C的DOM标准
+  核心DOM：
+	查找节点： document.getElementByXxx() querySelector()
+   	操作属性： node.setAttribute()/getAttribute()
+	操作内容： node.innerHTML/innerText/textContent
+	操作样式： node.style.xxx   node.className
+ 	增加节点： document.createElement()  parent.appendChild()
+	删除节点： parent.removeChild()
+	替代节点： parent.replaceChild()
+  HTML DOM:
+	var img = new Image()    img.src =””;
+  XML DOM:
+
+2.jQuery概述
+ jQuery是一个JS函数库，用于简化核心DOM操作，屏蔽浏览器兼容性。
+ http://jquery.com/  Write Less， Do More
+
+jquery-1.12.3.js		兼容老IE（IE8-）
+jquery-1.12.3.min.js  	压缩版本
+jquery-2.3.3.js			不兼容老IE
+jquery-2.3.3.min.js		压缩版本
+
+ jQuery提供的如下几个方面的简化函数：
+(1)查找元素
+(2)操作元素(属性/内容/样式/添加/删除/替换)
+(3)事件操作
+(4)动画操作
+(5)AJAX操作
+
+ftp://172.163.100.136
+
+
+ZenCoding代码补全：
+div+TAB 
+div*3+TAB
+div#id+TAB
+div.className+TAB
+ul>li>a+TAB
+lorem+TAB
+常用快捷键：                             
+Delete Line 删除行          Ctrl+D
+Duplicate Line 重复行        Ctrl+Alt+↓
+Move Up  上移              Alt+↑
+Move Down  下移           Alt+↓
+Line Comment  行注释      Ctrl+/
+
+
+3.jQuery的使用
+  (1)引入js文件，可以书写在&lt;head>或&lt;body>(推荐)中
+	&lt;script src=”jquery-1.11.3.js”>&lt;/script>
+  (2)编写自定义的script脚本
+	&lt;script>
+		//1. 查找元素
+		//2. 操作元素
+	&lt;/script>
+
+4.面试题：DOM对象和jQuery对象的关系
+  DOM对象：W3C的核心DOM标准定义浏览器内部都已经默认提供的对象
+	var btn = document.getElementById(‘btn1’);
+     btn.innerHTML = ‘’;
+	btn.setAttribute(‘class’, ‘’);
+	btn.style.xxXx = ‘’;
+	div.appendChild(btn);
+  jQuery对象：由jQuery.js函数库提供的，本质是一个“类数组对象”
+	var $btn = jQuery( btn );
+	var $btn = jQuery(‘#btn1’);
+	$btn.html(‘’);
+	$btn.attr(‘’, ‘’);
+	$btn.css(‘’, ‘’);
+	$btn.appendTo( div );
+ 提示：DOM对象不能使用jQuery对象的属性和方法；jQuery对象也不能使用DOM对象的属性和方法！
+  DOM对象封装为jQuery对象（DOM=>jQuery）：
+	$(DOM对象)、jQuery(DOM对象)
+	如： $(this)、$(document)、$(window)
+ jQuery对象拆解为DOM对象(jQuery=>DOM)：
+	var domObj = $(‘.mybox’)[0];
+	var domObj = $(‘input’).get(1);
+
+5.使用选择器查找DOM对象，构建出jQuery对象——基本选择器
+  提示：jQuery支持CSS1~3所有的选择器！用于查找需要的元素。屏蔽了选择器的兼容性问题。
+  	ID选择器：   		#id 		
+元素选择器：		element 
+Class选择器：		.class 
+通用选择器：		* 
+群组选择器：		selector1,selector2,selectorN
+
+练习：   
+若btn1的id不存在，则下面两行代码有何不同？
+document.getElementById(‘btn1’).style.color = ‘#f00’;
+$(‘#btn1’).css(‘color’, ‘#0f0’);
+
+休息&练习： 
+  $('#btn1').click(function(){
+	$('#one').css('background', 'red');
+});
+
+6.使用选择器查找DOM对象，构建出jQuery对象——层级选择器
+后代选择器：     	ancestor  descendant 
+直接子代选择器：	parent > child 
+相邻兄弟选择器：		prev + next 
+后续所有兄弟选择器：	prev ~ siblings
+
+7.使用选择器查找DOM对象，构建出jQuery对象——基本过滤选择器
+  提示：基本过滤选择器下标从0开始
+:first 			.box:first
+:last 			input:last
+:even 			tr:even
+:odd				tr:odd
+:eq(index)				   Equals
+:gt(index)			div:gt(3)    Greater Than
+:lt(index)			div:lt(3)	   Less Than
+:not(selector) 		li:not(.active)
+
+练习：
+ (1)使用jQuery选择器控制样式，实现“按钮组”组件
+
+ (2)使用jQuery选择器控制样式，实现隔行变色的表格
+	
+
+重点&非重点分割线
+
+8.使用选择器查找DOM对象，构建出jQuery对象——内容过滤选择器
+:contains(text) 		span:contains('购物车')
+:empty 				span:empty	选择空span
+:parent				span:parent   选择非空span
+:has(selector) 			div:has(.active)  有指定的子元素
+
+
+9.使用选择器查找DOM对象，构建出jQuery对象——可见性过滤选择器
+	:hidden 	选择所有的隐藏元素，包括不可见元素(如head/meta/script)、外加display:none的元素。
+:visible	选择所有的可见元素
+
+10.使用选择器查找DOM对象，构建出jQuery对象——属性选择器
+[attribute] 			img[title]
+[attribute=value] 		a[data-toggle="tab"]
+[attribute!=value] 
+[attribute^=value] 	属性值以指定内容开头
+[attribute$=value] 		属性值以指定内容结尾
+[attribute*=value] 		属性值包含指定内容
+
+练习：使用属性选择器实现标签页头的切换
+	
+
+11.使用选择器查找DOM对象，构建出jQuery对象——表单元素过滤选择器
+	:input 			选择所有的输入控件
+:text 			选择type="text"的输入控件
+:password 		选择type="password"的输入控件
+:radio 			选择type="radio"的输入控件
+:checkbox 
+:submit 
+:image 			&lt;input type="image">
+:reset 
+:button 			&lt;input type="button">
+:file 				&lt;input type="file">
+:hidden			&lt;input type="hidden">
+
+
+
+课后作业：
+实现一个下拉菜单组件
+&lt;div>
+	&lt;a >产品大全&lt;/a>
+	&lt;ul>
+	&lt;li>&lt;a>奶粉&lt;/a>&lt;/li>
+	&lt;li>&lt;a>尿不湿&lt;/a>&lt;/li>
+	&lt;li>&lt;/li>
+	&lt;li>&lt;a>冰箱&lt;/a>&lt;/li>
+	&lt;li>&lt;a>洗衣机&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/div>
+
+		</pre>
+	</body>
+</html>

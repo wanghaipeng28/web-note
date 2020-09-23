@@ -1,0 +1,260 @@
+<html>
+	<head>
+		<title>HTML-Day03</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1、结构标记
+   &lt;div id="a">&lt;/div>
+   &lt;div id="b">&lt;/div>
+   &lt;div id="c">&lt;/div>
+   ...
+   &lt;div id="aa">&lt;/div>
+   ...
+   
+
+   &lt;nav id="a">&lt;/nav>
+   
+   1、作用
+      为了提升标记的语义性
+   2、结构标记
+      1、&lt;header>&lt;/header>
+         作用：用于定义文档的页眉，就是html文档中最上面的内容
+	 等同于 ：&lt;div id="header">&lt;/div>
+
+	 &lt;header>
+		&lt;h1>Welcome&lt;/h1>
+		&lt;img src="..."/>
+	 &lt;/header>
+      2、&lt;nav>&lt;/nav>
+         作用：用来定义页面的导航链接部分
+	 &lt;nav>
+	    &lt;ul>
+	      &lt;li>&lt;/li>
+	    &lt;/ul>
+	 &lt;/nav>
+
+	 等同于：&lt;div id="nav">&lt;/div>
+      3、&lt;section>&lt;/section>
+         作用：文档主体内容中的小节,现在，section可以表示整个页面中的主体内容
+	 等同于：&lt;div id="main">&lt;/div>
+      4、&lt;article>&lt;/article>
+         作用：用于描述 文本性 较强，或艺术气息较强的
+	      一般情况下，论坛中的帖子信息、报纸中的文章信息、博客或微博中的条目信息、用户回复信息 优先考虑放在 article 中
+      5、&lt;footer>&lt;/footer>
+         作用：定义页面中或某个区域中的脚注信息（位置靠下的信息）
+      6、&lt;aside>&lt;/aside>
+         作用：多数情况用于定义页面中的 侧边栏 信息
+
+2、表单
+   1、表单作用
+      用于显示、收集信息 并且将信息提交个服务器
+
+      表单中主要包含两组内容：
+        1、表单元素
+	2、表单控件 
+   2、表单元素 &lt;form>
+      标签：&lt;form>&lt;/form>
+      注意：
+         1、使用表单控件提交数据时，表单不能省略
+      属性：
+         1、action : 动作，后台处理程序的地址(服务器端工程师提供)。默认 提交给本页。
+	 2、method : 方法、方式，表单的提交方式。不同的提交方式，约束的内容不一样。
+	   常用取值：2个
+	      get ：
+	          1、显示提交数据，会将提交信息显示在地址栏上，安全性不够高
+		  2、大小限制，最大支持到 2KB 的提交
+		  3、如果 不设置 method 属性的话，默认就会按照 get 的方式进行提交
+		  4、使用场合：向服务器索取数据时，优先使用get。
+	      post : 
+	          1、隐式提交数据，不会将提交的信息显示在地址栏上，安全性较高，所有有关密码的信息提交时，必须用post
+		  2、post 没有大小限制(大量数据提交时，可以使用)
+		  3、使用场合：
+		     1、安全性要求较高的页面(如包含敏感信息)
+		     2、要求服务器 去处理数据时， 使用post
+		     3、传递数据量较大时使用 
+        3、enctype(了解)
+	   功能：设置 表单中提交的数据的 编码方式
+	         规范哪些数据可以提交给服务器...
+	   取值：
+	     1、applicatioin/x-www-form-urlencoded
+	        默认值，
+		可以将普通的文本，特殊的字符，一起提交给服务器
+	     2、multipart/form-data
+	        允许将表单中的文件，传递给服务器，普通文本不能直接传递
+	     3、text/plain
+	        只能将普通文本(英文、数字)传递给服务器，特殊字符(=,& ...)不允许
+        4、id
+	5、name 
+   3、表单控件
+      1、什么是表单控件
+         包含在 表单 中的元素 ，具备可视化外观，并且可以接受用户输入的数据
+      2、分类
+         1、input 元素
+	 2、textarea 文本域
+	 3、select 和 option 选项框
+
+	 1、input 元素
+	    作用：收集用户信息
+	    语法：&lt;input>
+	    属性：
+	       1、type ：根据不同的类型值，可以创建不同的输入控件
+	       2、value ：控件的值，提交给服务器的数据
+	       3、name ：控件的名称，必须设置，否则无法提交。服务器主要根据name的值，来获取value。
+	       4、disabled ：禁用控件,该属性可以没有值。
+	     具体的 input 类型的控件
+
+	     1、文本框 与 密码框
+	        文本框: type="text"
+		        &lt;input type="text">
+		  作用：允许用户输入任意字符的数据，明文显示。
+		密码框：type="password"
+		        &lt;input type="password">
+		  作用：允许用户输入任意字符的数据，密文显示。
+		属性：
+		   1、maxlength ：限制输入的字符数
+		   2、readonly ：只读,无需给值，只有有该属性即可
+		   3、value ：控件值，同时也可以设置控件的默认值
+
+		注意：input元素下，如果不写 type值，或者 type值写错时，都默认为 文本框
+	     2、单选框 和 复选框
+		   单选框：type="radio"
+			   &lt;input type="radio">
+
+		   属性：
+		       1、name ：定义名称 并且 实现控件分组。只有一组内的元素才能实现单选
+		       2、value
+		       3、checked ：设置默认被选中,该属性不需要值
+
+		    复选框：type="checkbox"
+		            &lt;input type="checkbox">
+		    属性：
+		         name ：定义名称 并且 分组
+			 value :
+			 checked :
+	     3、按钮
+	        1、提交按钮
+		   功能固定化，负责将数据提交给服务器
+		   &lt;input type="submit">
+		2、重置按钮
+		   功能固定化，负责将表单控件恢复到初始化的状态
+		   &lt;input type="reset">
+		3、普通按钮
+		   没有固定功能，由 开发者 通过 JS 来设置
+		   &lt;input type="button">
+		属性：
+		   value : 显示在按钮上的文本
+		   name : 名称
+
+		4、非 input 标签的按钮
+		   &lt;button>&lt;/button>
+		   属性：type
+             4、隐藏域 和 文件选择框
+                1、隐藏域
+		   不想让用户看见，但是又要提交给服务器的数据，可以放在 隐藏域 中
+		   eg ：用户 id 
+		   type="hidden"
+		   &lt;input type="hidden">
+
+		   属性：
+		       name
+		       value
+
+		    https://www.baidu.com/?username=admin&userpass=admin&repass=admin&gender=Male&hobby=drink&userID=334455
+		2、文件选择框 
+		   作用：提供一个基础控件，允许用户选择本机的文件上传到服务器
+		   type="file"
+		   &lt;input type="file">
+		   属性：
+		      name 
+		   
+		   注意：
+			1、表单的method 属性值必须为post
+			2、表单的enctype属性值必须为 multipart/form-data
+	 2、textarea
+	    文本域，能够接收用户录入的多行数据
+	    标签：&lt;textarea>默认文本&lt;/textarea>
+	    属性：
+	         name ：名称
+		 readonly ：只读
+		 cols : 指定文本区域的列数,变相的设置控件的宽度
+		 rows : 指定文本区域的行数,变相的设置控件的高度，数据如果超出高度的话，则出现滚动条
+	 3、选项框
+	    1、下拉选项框
+	    2、滚动列表
+
+	    标签：
+	      1、选项框
+	         &lt;select>&lt;/select>
+		 属性：
+		   name：
+		   size：默认显示的选项数量是几个
+		         如果 值  大于1 则为 滚动列表，否则就是下拉选项框
+		   multiple : 设置多选，可以没有值，配合着 键盘上的 ctrl 或 shift 键位 一起
+	      2、选项
+	         &lt;option>显示的值&lt;/option>
+
+		 属性：
+		    value ：提交给后台服务器的值
+		    selected : 设置默认被选中，可以没有值
+	    
+         4、其他标记
+	    1、&lt;label>&lt;label>
+	       作用：关联文本和表单控件，关联后，点击文本就如同是点击控件一样。
+	       语法：&lt;label>文本&lt;label>
+	       属性：
+	             for : 指定 与当前 label 相关联的控件的  id 值
+	    2、为控件分组
+	       分组：&lt;fieldset>&lt;/fieldset> 
+	       标题：&lt;legend>&lt;/legend>
+3、其他标记
+   1、浮动框架
+      可以将多个页面放到一个页面中去显示，就是页面间的嵌套
+
+      标签：&lt;iframe>&lt;/iframe>
+      属性：
+            1、src
+	       要引入的网页url
+	    2、width
+	    3、height
+	    4、frameborder
+	       浮动框架的边框，可以手动设置为 0
+   2、摘要与细节
+      简单模拟 展开 与 收缩的动作的标记
+      标记：
+        &lt;details>&lt;/details> 用于定义细节信息
+	&lt;summary>&lt;/summary> 定义细节内容的标题，允许被用户点击的部分，是 &lt;details>的子标记
+   3、度量元素
+      可以在页面中定义一个度量衡,可以描述有关 比例 信息
+      标记：
+         &lt;meter>文本&lt;/meter>
+      属性：
+         min : 定义范围的最小值,默认值为0
+	 max : 定义范围的最大值,默认值为1
+	 value : 度量值，当前显示的值，默认为0
+   4、时间元素
+      用于定义 显示的时间 与 具体时间值的一个关联操作
+      标记:
+        &lt;time>显示的文本&lt;/time>
+      属性：
+        datetime : 设置关联的日期 和 时间,日期与时间之间用T来分割
+   5、高亮文本显示
+      标记：
+        &lt;mark>高亮显示的文本&lt;/mark>
+
+
+
+
+file:///E:/%E8%B5%B5%E6%97%AD/WEB1602/HTML5Basic/Day03/01.html?username=admin&userpass=admin&repass=admin&gender=Female&hobby=on&hobby=on
+
+file:///E:/%E8%B5%B5%E6%97%AD/WEB1602/HTML5Basic/Day03/01.html?username=sanfeng.zh&userpass=yinsusu&repass=yinsusu&gender=Female&hobby=eat&hobby=happy
+
+https://www.baidu.com/?username=sanfeng.zh&userpass=admin&repass=admin&gender=Male&hobby=drink
+
+file:///E:/%E8%B5%B5%E6%97%AD/Course/01_HTML5BASIC/03_SRC/COOKBOOK/WEB_HTML5BASIC_COOKBOOK_DAY03/Day03_form_v01.html?username=mary&sex=0&sel1=1&description=
+
+https://www.baidu.com/?username=%E8%AF%B7%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%90%8D%E7%A7%B0&userpass=&repass=&gender=Male&userID=334455&city=GZ
+		</pre>
+	</body>
+</html>

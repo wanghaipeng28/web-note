@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<title>jQueryMobile-Day11</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1、前端框架汇总
+
+	jQuery js函数库，简化DOM操作。在10000访问最高的站点中，60% jq
+
+	jQueryUI 一个HTML组件库，用在PC端
+
+	bootStrap CSS样式库+HTML组件库，用在响应式布局
+
+	AngularJS 基于MVC（Model View Controller），用于数据处理（增删改查）为主的SPA应用，将业务和数据做了良好的分离
+
+	jQueryMobile：HTML组件库，用于mobile端应用，良好的组件看起来更像原生应用。
+
+
+2、配对组合
+
+	jQ + jQUI pc端
+	jQ + boot 做一些响应式
+	jQ + ng 搭配复杂的spa应用
+	jQ + jQM 移动端的spa应用
+
+	jQUI +boot 比较少
+	jQUI+ ng  ok
+	jQUI + jQM 很少
+
+	boot + ng 没问题，功能全面
+	boot + jQM 很少
+
+	ng+jqm 用在制作手机应用界面
+
+3、ng+jqm
+
+	3.1 spa方案选择
+	ng：ng ngRoute ngAnimate 用在spa
+	访问格式： http://127.0.0.1/index.html#/user
+
+	jqm： http://127.0.0.1/2.html
+
+	jqm实现简单，在一般的小项目，选择jqm的spa方案
+
+	3.2 导航方式
+
+	学习jqm，通过$.mobile.changepage('2.html',{'transition':'flip'})
+
+
+3.3 动态添加数据问题
+
+	//获取当前元素对应的作用域对象
+	var scope = $('#container').scope();
+
+	//获取注入器对象
+	var injector = $('#container').injector();
+
+	//调用注入器，为程序提供$compile服务
+	injector.invoke(function($compile){
+		//编译并链接DOM节点
+		$compile($('#container'))(scope);
+		scope.$digest();
+		});
+
+		</pre>
+	</body>
+</html>

@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<title>HTML5-Day04</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1.项目中Canvas绘图技术应用场合
+  (1)动画/游戏
+  (2)统计图表
+1)手工调用ctx.xxx()相关函数，绘制图表
+2)还可以使用第三方提供的统计图表绘制函数库
+· FusionCharts
+· HighCharts
+· ECharts
+· FreeChart
+· Chart.js
+
+2.学习Chart.js的使用
+  目标：不单单是如何使用Chart.js，更多的是熟悉“自学第三方工具库”的过程——官网和手册的使用！
+  http://www.chartjs.org/
+Chart.js的特点：
+(1)开源
+(2)8种图形可用
+(3)原生JS，基于Canvas
+(4)支持响应式特性
+
+3.学习FusionCharts的使用
+  目标：不单单是如何使用FusionCharts，更多的是熟悉“自学第三方工具库”的过程——官网和手册的使用！
+http://www.fusioncharts.com/
+FusionCharts的特点：
+(1)仅对商业应用收费
+(2)90+种图形可用，支持地图应用
+(3)可以整合jQuery、AngularJS等框架
+(4)支持响应式特性
+
+4.思考：如何为Canvas上的某个图形图像添加事件监听？
+ &lt;canvas id="c2">&lt;/canvas>
+ var ctx = c2.getContext('2d');
+ ctx.fillRect( 10, 10, 50, 50 );
+ -------------------------------
+ c2.onmousemove = function(event){   //JS事件只能绑定到元素上
+var x = event.offsetX;
+var y = event.offsetY;
+if( x>= ? && x&lt;=? && y>=? && y&lt;=? ){
+///重新绘图
+}
+ }
+
+
+5.浏览器中支持的绘图技术共有三种
+  (1)Canvas绘图技术——HTML5标准
+  (2)SVG绘图技术——W3C标准，HTML5支持
+  (3)WebGL——功能强大，非标准
+
+
+Canvas：是位图技术，缩放后会失真，善于表现颜色/线条细节
+SVG：是矢量图技术，可以无限缩放，不适合丰富的色彩/线条细节
+
+6.SVG绘图技术
+  Scalable Vector Graphic，可缩放的矢量图，可以任意缩放而不会失真，效果类似于Flash、AI设计图。
+  SVG（HTML技术，不依赖于任何播放器）的竞争对手：Flash（私有技术，依赖于播放器）。
+  Canvas绘图技术和SVG绘图技术的比较：
+Canvas	SVG
+位图技术，可以保存为.png	矢量图技术，不能保存为位图
+善于表现颜色/线条细节	可以缩放，不善于表现细节
+网页游戏、统计图	图标、统计图、地图
+1个标签 + 1个对象——所有图形图像都靠ctx绘制	几十个标签——每个图形对应一个标签
+不能被搜索引擎爬虫所访问	可以被搜索引擎所访问
+只能为整个Canvas绑定监听函数	每个图形(标签)可以绑定事件
+
+
+7.绘制SVG图形的方法
+  SVG 2013就已经被W3C采纳为标准，当时还没有HTML5标准。
+  HTML5之前：SVG图形需要编写在独立的.svg文件中
+(1)编写一个.svg文本文件——XML文件
+(2)在HTML中使用img/iframe/embed/object引用.svg文件  
+  HTML5之后：SVG标签可以直接书写在HTML文件中
+
+ (1)绘制矩形
+&lt;rect x="0" y="0" width="100" height="100" fill="填充颜色" stroke="描边颜色" stroke-width="描边宽度" rx="横向倒角" ry="纵向倒角" onmouseover="监听函数">&lt;/rect>
+ (2)绘制圆形
+&lt;circle cx="圆心X" cy="圆心Y" r="半径" fill="填充颜色" stroke="描边颜色" stroke-width="描边宽度" rx="横向倒角" ry="纵向倒角" onmouseover="监听函数">&lt;/circle>
+ (3)绘制椭圆
+ (4)绘制直线
+ (5)绘制折线
+ (6)绘制多边形
+ (7)绘制文本
+ (8)绘制图像
+		</pre>
+	</body>
+</html>

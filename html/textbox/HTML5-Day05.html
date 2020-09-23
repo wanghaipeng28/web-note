@@ -1,0 +1,90 @@
+<html>
+	<head>
+		<title>HTML5-Day05</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1.使用SVG绘图
+  （1）绘制矩形
+	&lt;rect x="" y="" width="宽" height="高" fill="" stroke="" stroke-width="">
+	&lt;/rect>
+  （2）绘制圆形
+&lt;circle cx="" cy="" r="" fill="" stroke="">&lt;/circle>
+  （3）绘制椭圆
+&lt;ellipse cx="圆心X" cy="圆形Y" rx="横向半径" ry="纵向半径" ....>&lt;/ellipse>
+  （4）绘制直线
+&lt;line x1="" y1="" x2="" y2="">&lt;/line>
+  （5）绘制折线———消费统计图
+&lt;polyline points="x1,y1  x2,y2  x3,y3, ....">
+  （6）绘制多边形——必须闭合
+&lt;polygon points="x1,y1  x2,y2  x3,y3, ....">&lt;/polygon>
+  （7）绘制文本
+&lt;text x="" y="" font-size="" font-family="">文本内容&lt;/text>
+  （8）绘制图像——可以引用另一个位图/SVG图的URL
+&lt;image xlink:href="1.jpg/2.svg">&lt;/image>
+     注意：若绘制了位图，则SVG图就不能再无限缩放了
+  (9) 图形图像分组
+&lt;g id="">
+&lt;rect>&lt;/rect>
+&lt;circle>&lt;/circle>
+.....
+&lt;/g>
+
+练习：使用svg绘制一个随机的验证码图片
+练习：绘制一个笑脸，一起移动		
+提示：项目中，若SVG图形太复杂，刻意使用Illustrator画出图形，到处为.svg文件即可。
+
+
+
+2.SVG图形图像可以支持的三种动画
+  （1）SMIL动画——过时
+  （2）JS动画——支持，定时器+属性值改变
+  （3）CSS动画——支持，Transition/Keyframes
+
+3.SVG中如何动态的添加新的元素
+  (1)方法1： 修改svg元素的innerHTML属性
+  (2)方法2： 使用document.createElementNS('', '')
+提示：使用document.createElement()方法是无效的。
+
+午间练习：每隔半秒钟在svg随机出现一个小球(位置、大小、颜色、速度随机), 滚动3s后渐渐消失。
+
+4.为图形添加渐变色
+  &lt;svg>
+&lt;defs>
+&lt;linearGradient id="g2" x1="0" y1="0" x2="0" y2="100%">
+&lt;stop offset="0" stop-color="#f00" stop-opacity="1">&lt;/stop>
+&lt;stop offset="100%" stop-color="#f00" stop-opacity="0">&lt;/stop>
+&lt;/linearGradien>
+&lt;/defs>
+
+&lt;rect  fill="url(#g2)"  stroke="url(#g2)">&lt;/rect>
+  &lt;/svg>  
+
+5.为图形添加滤镜
+  SVG技术为图形提供了几十种滤镜(Filter)——推荐先学习PS中的滤镜
+  此处演示“高斯模糊”滤镜的使用：
+  &lt;svg>
+&lt;defs>
+&lt;filter id="f2">
+&lt;feGaussianBlur  stdDeviation="3">&lt;/feGaussionBlur>
+&lt;/filter>
+&lt;/defs>
+
+&lt;rect  filter="url(#f2)">&lt;/rect>
+  &lt;/svg>
+
+
+
+浏览器支持三种绘图技术：
+(1)Canvas
+(2)SVG
+(3)WebGL
+都可以绘制图形、文字、路径、图像，但由于底层特性，调用的接口各不相同；增加了学习和使用的复杂度。
+
+6.第三方绘图函数库——Two.js
+ 一个二维绘图函数库，用一套完全的一样调用接口，可以随意的使用Canvas/SVG/WebGL实现绘图。
+http://jonobr1.github.io/two.js/
+		</pre>
+	</body>
+</html>

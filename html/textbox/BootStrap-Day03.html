@@ -1,0 +1,103 @@
+<html>
+	<head>
+		<title>BootStrap-Day03</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+五、组件:boot 提供的各种成型的组成部分，比如下拉菜单，导航条，页签。直接构建我们的页面
+	0、使用 CSS、JS、Fonts
+
+	1、图标字体：glyphicon基本效果  glyphicon-**
+		--->font的文件
+http://localhost:63342/P01/01_nav.html	 apach
+
+	2、下拉菜单：折叠式的下拉效果
+		&lt;select>&lt;option>   -html标记
+		&lt;button>&lt;/button>  ---原生代码
+		&lt;ul>&lt;/ul>
+
+		boot提供的组件：
+			&lt;div class="dropdown/dropup">---外层的包含框
+				&lt;a/button data-toggle="dropdown"  ---点击
+				&lt;ul class="dropdown-menu">---弹出的菜单项
+					&lt;li>&lt;/li>
+				&lt;/ul>
+			&lt;/div>
+		---》实现组件的动效，引入 jquery 和 boot.js		
+
+	3、按钮组
+		&lt;div class="btn-group">
+			&lt;button>/&lt;a>
+			
+		&lt;/div>
+
+	4、警告框
+		&lt;div class="alert alert-info/danger">
+			&lt;span data-dismiss="alert">文本或者图标
+			其他文本图标。。。
+
+
+----》boot所提供的组件中，提供了一个非常重要的属性 data-***(自定义的扩展属性)--js插件的定义（js代码）
+		data-toggle：切换，切换显示的地方---》根据属性的取值的不同，实现切换不同的元素
+		data-dismiss
+
+	5、导航：将多个元素组成一组，作为标签页类型的导航
+		&lt;ul class="nav nav-tabs"
+			&lt;li>&lt;a data-toggle="tab"
+
+
+	6、导航条：把多种元素放在一起，作为导航--》导航条---》经常做成响应式的导航条
+		a、划分结构
+			logo：固定在左侧
+			左侧菜单
+			右侧菜单
+			折叠指示框：当放不下的时候，切换显示隐藏起来的菜单项
+
+		b、html代码的结构
+&lt;div class="navbar navbar-default" --贯穿整个页面 
+	&lt;div class="container"	--上下的边距一致
+		&lt;div class="navbar-header">
+			&lt;a class="navbar-brand">&lt;img />&lt;/a>
+			&lt;a/button class="navbar-toggle"
+				data-target="#n1"
+				data-toggle="collapse"
+>
+				&lt;span class="icon-bar">&lt;/span>
+			&lt;/a>
+		&lt;/div>
+		&lt;div class="collapse navbar-collapse" id="n1">
+			&lt;ul class="nav navbar-nav">
+				&lt;li>
+			&lt;/ul>
+			&lt;ul>
+				&lt;li>
+			&lt;/ul>
+		&lt;/div>
+
+		c、样式：navbar  collapse 
+
+		d、动态效果  通过id进行绑定
+
+	7、面板：两层结构  样式关键字 panel
+
+	8、媒体对象：两层结构，图和文字，水平方向如何排列 样式关键字 media
+
+	9、路径导航 
+
+	10、列表组：竖向的列表效果 list
+
+	11、输入框组
+
+	12、其他
+
+DOM-->jquery-->其他js框架的封装
+	boot:CSS和js的封装---长处在于样式和动效，实现页面的组成
+	ng：js的进一步的封装----DOM操作（绑定和显示）
+
+js
+	var arr = [11,222,333,4444];
+	ajax从服务器端获取来的
+		</pre>
+	</body>
+</html>

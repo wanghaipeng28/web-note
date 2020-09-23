@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<title>HTML5-Day03</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1.使用绘图对象绘制图形
+  (1)绘制矩形
+ctx.fillStyle = '单色'/渐变色;
+ctx.fillRect( x, y, w, h );
+ctx.strokeStyle  = '单色'/渐变色;
+ctx.lineWidth = 1;
+ctx.strokeRect( x, y, w, h );
+ctx.clearRect( x, y, w, h );
+  (2)绘制文本
+ctx.font = '12px SimHei';
+var w = ctx.measureText( txt ).width;
+ctx.fillText( txt, x, y );
+ctx.strokeText( txt, x, y ); 
+  (3)绘制路径（直线/折线/曲线）
+ctx.beginPath( );	
+ctx.moveTo(x, y);
+ctx.lineTo(x, y);
+ctx.arc( x,y,r,sAngle,eAngle,counterclockwise)
+ctx.ellipse(x,y,hr,vr,sAngle,eAngle,counterclockwise)	ctx.closePath( );   //闭合路径，用于填充
+----------------------
+ctx.stroke( );
+ctx.fill( );
+练习：(1)绘制一个信封   (2)绘制吃豆人
+
+
+2.使用绘图对象绘制图像
+  var img = new Image();
+  img.src = '1.jpg';
+  img.onload = function(){   //必须待图片加载完成，才能绘制
+ctx.drawImage(img, x, y); //图片的定位点在左上角
+ctx.drawImage(img, x, y,  w,  h); //缩放绘制
+  }
+  //练习：绘制一个可以在画布上飞来飞去的飞机
+  ctx.rotate( 弧度制角度 );    //将画笔进行转换，绘制出旋转后的图像——旋转以画布的原点的为轴心——画布的轴点默认在左上角。
+  ctx.translate( x, y );	//位移，改变整个画布的原点坐标
+  //练习：绘制一个可以绕自身旋转的飞机
+
+
+
+
+3.异步请求间的同步问题
+  需求：使用异步请求获取图片1和图片2——谁先被获取到无法预测；要求必须待两个图片全部加载完成，才能执行某项任务。
+  img1.src = "1.jpg"
+  boolean img1Loaded = false;
+  img1.onload = function(){					true   true
+img1Loaded = true;
+if(img2Loaded){  chiFan()  }
+  }
+  img2.src = "2.jpg";
+  boolean img2Loaded = false;
+  img2.onload = function(){
+img2Loaded = true;
+if(img1Loaded){  chiFan()  }
+  }
+  function chiFan(){  }
+		</pre>
+	</body>
+</html>

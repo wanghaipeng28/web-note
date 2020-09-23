@@ -1,0 +1,174 @@
+<html>
+	<head>
+		<title>jQueryMobile-Day09</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1、webApp NativeApp HybirdApp（webview+web代码）
+
+2、使用Eclipse+ADT 完成Android开发
+
+3、第一个混合应用
+	WebView wv =new WebView(getApplicationContext());
+	wv.loadUrl("http://www.baidu.com");
+
+	//前端代码放到：Android工程assets文件下 test.html
+
+	wv.loadUrl("file:///android_asset/test.html");
+	//如果说在混编中执行对应的js代码，执行
+	wv.getSettings().setJavaScriptEnable(true);
+
+	setContentView(wv);
+
+
+配置对应的权限。
+	AndroidManifest.xml完成配置 internet setting
+
+4、集中：
+	工程创建的配置
+	对于Eclipse开发工具文件夹或者导航栏介绍
+
+
+————————————————————————————————————————————————————————
+
+
+一、认识jQM：
+
+	h5 ui框架，
+	特点：为触控优化，制作写响应式的网站和应用（手机），可以
+	用在所有流行的智能手机 平板。。
+
+	官网：http://jquerymobile.com/
+
+	主题滚筒：
+	http://themeroller.jquerymobile.com/
+	可以将主题中的按钮、link修改成和企业相对应的配色或者文本大小等
+
+
+
+二、第一个JQM页面：
+	data-role='page'
+	header
+	class='ui-content'
+	footer
+
+	page
+
+三、data属性总结
+
+	data属性 	 作用
+	data-role="page"  jqm页面	
+	data-role='header' 页头
+	data-role='footer' 页脚
+	（class=‘ui-content’ 页面正文）
+	data-rel='back'  可以直接原路返回上一个页面（a标签）
+	data-transition='slide/fade/none....'
+	data-direction='reverse'
+	data-corner 圆角
+	data-shadow 阴影
+	data-icon 图标
+	data-iconpos 图标位置（left/right/top/bottom/notext）
+	data-mini 调整按钮的大小
+	data-theme='a/b'调整不同的主题
+	data-postion='left/right'
+	data-display='overlay/push/reveal'
+	data-rel='close' 关闭一个面板
+
+四、SPA
+	jqm在实现spa（single page application）应用，可以直接在html文件指定多个page
+
+五、多个页面之间跳转以及动画效果：
+	&lt;a href='#page2'>jump &lt;/a>
+	&lt;button	onclick="$.mobile.changePage('3.html')">jump&lt;/button>
+
+	当你由不同的页面跳转到指定的页面（3.html），在页面做返回时？
+	如何灵活的实现*.html 跳转到 3.html后，实现后退？ 指定data-rel='back'
+
+	多页面跳转时，如何指定动画效果？
+
+	方式1：
+	&lt;a href="#page2" data-transition="flip">跳转到页面2&lt;/a>
+
+	方式2：
+	&lt;button onclick="$.mobile.changePage('3.html',{'transition':'slide'})">跳转到页面3&lt;/button>
+
+	10分钟：测试各种动画效果！
+	如何实现相反的效果？
+	data-direction='reverse'
+
+
+六、按钮
+	1、按钮的三种形式
+
+		&lt;button> button1 &lt;/button>
+
+		&lt;a href="" data-role="button">button2&lt;/a>
+
+		&lt;input type="button" value="button3"/>
+
+
+		a标签样式的按钮导航使用，其余用在表单中。
+
+
+2、按钮的常用设置
+
+	尝试实现：
+	圆角data-corners
+	阴影data-shadow
+	内联：data-inline
+	icon、是否允许点击
+
+七、grid
+
+	1、如何设置布局几列
+
+		grid（行） block（列）
+
+		ui-grid-solo/a/b/c/d
+		每行拥有一列/两列/3/4/5
+
+		ui-block-a/b/c/d/e
+		第1列、第2列。。。
+
+
+		ui-grid-a 行里可以有2列。ui-block-a/b(50%)
+
+		ui-grid-b 3列 ui-block-a/b/c(33%)
+		ui-grid-c 4列 ui-block-a/b/c/d(25%)
+		ui-grid-d 5列 ui-block-a/b/c/d/e(20%)
+
+		如果说遇到ui-block-a,就会重启一行。
+
+八、panel（面板/抽屉）
+
+	1、panel必须在page页面中
+	2、panel可以放置在page的footer下方，header上方，
+	但是不要插在header、content、footer中间
+	3、？ a href='#panel1'
+	4、data-position 设置面板从
+	哪边打开
+	5、data-display 面板打开的方式（overlay reveal push）
+	6、data-dismissible='false'
+	点击面板外侧，不会主动关闭面板
+	7、指定a标签，data-rel='close'
+
+练习：（。。-16:35）
+有两个链接，
+1个打开面板1（左侧打开，overlay），
+另一个打开面板2(右侧打开，reveal)
+
+ui-bar ui-body
+
+
+每日一练：
+
+练习1：面板打开/关闭：
+
+$('#p1').panel('open');
+$('#p1').panel('close');
+
+练习2：实现一个计算器的效果：
+		</pre>
+	</body>
+</html>

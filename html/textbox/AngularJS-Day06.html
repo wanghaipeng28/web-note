@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<title>AngularJS-Day06</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+AngularJS有四大特性：
+	MVC模式
+	双向数据绑定
+	依赖注入
+	模块化设计
+
+Model     View
+
+	方向1：Model的修改，View实现界面更新
+
+	方向2：View的修改，Model数据也跟着修改
+	主要用在表单提交和搜索
+
+	ng-model='kw' 在控制器当中，可以监听kw的变化。
+	$scope.$watch('kw',funciton()
+	{
+	})
+	ng-disabled='true/false' 
+	ng-checked
+	ng-show
+	ng-hide
+
+当我们需要对数据进行格式化，排序，只显示头几条数据，
+过滤器：
+	$scope.price = 23.56;
+	&lt;p>{{price | currency:'￥'}}&lt;/p>
+	currency  number  orderBy  uppercase lowercase 
+	&lt;p>{{price | orderBy:'orderId':true}}&lt;/p>
+
+对数据做额外操作，比如说JSON解析、大小写转换，需要
+依赖AngularJS给提供 ：函数。
+
+	大小写转换。
+	json字符串和对象的转换
+	forEach函数
+	其他的自己去学习
+
+总结MVC模式：
+	ng解决的是增强DOM的操作：如何让HTML页面元素灵活
+	且低耦合的去访问JS中的变量
+	为了不再代码中频繁的使用getElementById这种方式，
+	为了不再让代码受限于id，所以需要将页面显示和数据隔离。
+	此时数据作为变量存在，由控制器控制其作用域，不同的Controller有着
+	隔离的作用域
+
+
+$scope 作用域
+$rootScope 根作用域
+
+$timeout
+$interval
+
+$http 可以用于向服务器发起AJAX请求，
+异步的获取服务器端返回的数据，声明
+为模型数据之后，即可在视图中呈现
+
+用法1：
+ $http({method: 'GET', url: '/someUrl'}).
+    success(Function(data, status, headers, config) {
+      // this callback will be called asynchronously
+      // when the response is available
+    }).
+    error(Function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
+
+ 用法2：
+ $http.get('/someUrl').success(successCallback);
+ $http.post('/someUrl', data).success(successCallback);
+		</pre>
+	</body>
+</html>

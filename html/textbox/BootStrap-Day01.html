@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<title>BootStrap-Day01</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1、web前端基础的技术：html/css/js/ajax + HTML5
+2、框架技术--》不同的目的，针对于不同的原生代码进行封装
+3、jQuery(DOM操作的封装)、chart.js/two.js
+4、框架整合：页面上使用多种框架技术
+	a、使用框架：引入js/css文件
+	b、根据需求灵活选择不同的框架中的 API
+5、学习方式：
+	a、学会查手册
+	b、分析代码，模仿代码
+	c、记忆：核心点
+
+Bootstrap：对 CSS 和 JS 进行了封装，提供了css样式类，常见动效，自适应（响应式）布局
+	面试题：谈谈自适应（响应式）布局的理解（1、作用  2、如何实现  3、适用性）
+		前端性能优化：减少服务器的交互（背景图、1个css使用@media）
+
+一、概述
+	1、bootstrap的作用：
+	2、包含哪些内容
+		全局样式类、栅格布局、常用组件、插件、定制
+	3、开发工具：webstorm
+
+二、手工实现响应式布局
+	1、百分比 + 浮动
+	2、CSS媒体查询技术：在CSS代码中，media技术--》根据屏幕的大小，自动选择执行哪些 CSS 代码
+		@media screen and (min-width:990px){
+			div.box {}
+		}
+		@media screen and (max-width:989px) and (min-w){
+			div.box {}
+		}
+
+	3、如何实现
+		a、使用 webstorm 开发：以项目作为文件的组织方式
+		b、添加特有的代码
+
+	4、如何测试
+		a、浏览器调试：模拟不同尺寸的屏幕
+		b、ADT
+		c、真机测试
+
+	5、定义页面的视口
+		a、声明页面适应不同的客户端设备
+			----页面宽度的自适应
+
+	6、定义响应式的 CSS 代码
+		a、尺寸使用 百分比
+		b、img：使用 max-width
+		c、使用 :after 实现浮动的清除
+		d、字体：使用 em  &lt;div>aa&lt;p>bb&lt;/p>&lt;/div>
+		e、使用媒体查询技术
+
+	7、media属性:link标记里添加 media 属性，实现选择性的执行某个 CSS 文件
+		&lt;link media="screen/print"/>--打印或者屏幕
+		&lt;link media="screen and (max-width:) and (min-width:)"
+	--->把所有的 CSS 文件下载，选择性的使用
+		三个 css 文件做成 1 个 css，在css 文件里，选择执行某些代码
+
+	8、@media--CSS 媒体查询技术：使用 1 个CSS 文件即可，可以在文件中，添加媒体的查询
+		@media screen and (max-width:;) or (min-width:;) and (orientation:;) {
+		}
+
+		@media () {
+	
+		}
+---分开屏幕的尺寸
+	超大屏：>1200px
+	PC屏：992px  ---1199
+	PAD屏幕：768 --- 991
+	PHONE：767
+
+	9、实践案例：布局、细节--》手工代码实现
+		a、代码的细节:CSS RESET
+		b、什么情况下适合使用响应式
+			不适应特别复杂的网站，电商
+			适应 门户网站、个人站点
+
+三、Bootstrap 框架：起步（介绍）、全局样式类、组件、插件、定制
+	1、框架文件：css和js文件
+                     帮助手册
+
+	2、建立一个使用 boot 的html 文件
+		&lt;head>
+			&lt;meta name="viewport"
+			&lt;link css
+			&lt;!-- if lt ie 9
+			&lt;script js
+
+	3、可以使用提供的各种样式：按钮
+
+	4、bootstrap.css文件
+		a、CSS reset：基本元素的样式定义
+		b、盒子模型的计算方式
+			box-sizing:content-box;--->width/height：内容区域（padding会撑开元素的框）--》保证内容的显示，缺点是计算总尺寸麻烦
+			box-sizing:border-box;---》width/height：框的尺寸（padding计算在框之内的）优先保证布局和尺寸---》适用于响应式布局
+		c、百分比+浮动
+		d、@media
+		</pre>
+	</body>
+</html>

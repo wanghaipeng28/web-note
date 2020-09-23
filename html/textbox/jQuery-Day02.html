@@ -1,0 +1,183 @@
+<html>
+	<head>
+		<title>jQuery-Day02</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+复习：
+jQuery是一个JS函数库，用于简化核心DOM操作，分为如下几部分：
+(1)查找节点
+(2)操作节点的属性		attr( )
+(3)操作节点的内容		html( )  text( )  val( )  empty( )
+(4)操作节点的样式		css( )
+(5)增加新节点
+(6)删除节点
+(7)替换节点
+(8)事件处理
+(9)动画
+(10)AJAX封装
+
+
+1.复习：jQuery中的选择器
+  基本选择器：$('#id')  $('.class')  $('*')  $('div')  $('s1,s2')
+  层级选择器：$('p c')  $('p > c')  $('b + b')  $('b ~ b')
+  过滤选择器——基本：
+$('li:first') $('li:last') $('li:eq(0)') $('li:gt(3)') $('li:lt(3)') $('tr:odd') $('tr:even')
+  过滤选择器——内容：
+$('p:contains("提交")') $('p:empty') $('p:parent') $('p:has(a)')
+  过滤选择器——属性：
+$('[title]') $('[title^="图片"]') $('[title$="相关"]') $('[title="达内图片"]')
+$('[title*="达内"]')
+  过滤选择器——可见性：
+$('div:hidden')  $('div:visible')
+  过滤选择器——子元素：
+  过滤选择器——表单元素状态：
+  表单元素选择器：
+$(':input') $(':text') $(':password') $(':raido') $(':checkbox') $(':hidden') $(':file') $(':submit') $(':reset') $(':image') $(':button')
+
+
+
+2.jQuery选择器：过滤选择器——表单元素状态
+  &lt;input  name="uname" disabled>
+  &lt;input type="checkbox" checked>
+  &lt;option value="bj" selected>北京市&lt;/option>
+----------------------------------------------------
+  	$(':disabled')
+$(':enabled')
+$(':checked')
+$(':selected')
+
+
+3.jQuery过滤选择器——子元素
+  提示：子元素过滤选择器 容易与 基本过滤选择器 混淆！
+  基本过滤选择器：下标从0开始，选择的是整个大的类数组对象中的某一个  
+$('li:first')    $('tr:odd')
+  子元素过滤选择器：下标从1开始，选择的当前父元素中的第n个
+:first-child 		只选中第一个子元素
+:last-child 		只选中最后一个子元素
+:nth-child 		只选中第n个子元素
+:only-child 		只选中唯一子元素
+$('li:first-child')   $('tr:nth-child(odd)')
+
+
+4.操作节点的属性
+  $(..).attr( '属性名' )			&lt;=>  e.getAttribute('');
+  $(..).attr( '属性名',  '属性值' )	&lt;=>	  e.setAttrbiute('', '')
+
+练习：点击图片，则图片内容改变为下一张，title文字随之改变
+&lt;img src="" title="">
+
+5.操作元素的内容
+  $(..).html( )			&lt;=> 	e.innerHTML
+  $(..).html('HTML片段')	&lt;=>		e.innerHTML = '片段'
+  $(..).text( )			&lt;=>		e.innerText	
+  $(..).text('文本')		&lt;=>		e.innerText = '文本'
+  $(..).empty( )			&lt;=>  	e.innerHTML = ''
+
+6.操作表单元素的值
+  $(..).val( )			&lt;=>		input.value
+  $(..).val( '值' )		&lt;=>		input.value = '值'
+
+练习：注册新用户的表单，用户点击“提交”按钮时，读取用户输入的用户名和密码，在输入框后面提示出输入是否存在问题
+
+
+7.操作节点的样式
+  $(..).css( '样式名' )		&lt;=>		window.getComputedStyle()
+  $(..).css( '样式名', '值' )	&lt;=>		e.style.xxxXxx = 值;
+  $(..).css( {
+样式名: 值,
+样式名: 值,
+....
+  } )
+ 提示： 
+css()可以获得哪些样式？ :  行内、内部、外部
+css()可以修改哪些样式？： 行内！
+样式名的命名规则？：可以使用驼峰法则，或-连字符(必须使用引号括起来)
+
+8.操作元素的样式——直接修改class属性值
+  $(..).addClass( '名' )
+  $(..).removeClass( '名' )
+  $(..).hasClass( '名' )
+  $(..).toggleClass( '名' )			切换，若有则删除；否则添加
+
+9.添加新的节点
+  核心DOM中添加新节点：
+var span = document.createElement('span');
+span.innerHTML = '用户名已经存在';
+span.setAttribute('title', '错误提示');
+div.appendChild( span);
+  jQuery对添加新节点的简化：
+var $span = $('&lt;span title="错误提示">用户名已经存在&lt;/span>');
+$('div').append($span);
+  插入节点相关jQuery函数：
+  	append( )
+prepend( )
+appendTo( )
+prependTo( )
+before()
+after()
+insertBefore()
+insertAfter()
+wrap()
+unwrap()
+
+10.删除已有节点
+$(..).remove( )		删除选定元素
+
+练习：添加和删除区块
+
+
+11. 替换已有节点
+$('已有元素').replaceWith('新元素')
+$('新元素').replaceAll('已有元素')
+
+12.复制节点		
+$(..).clone( )			复制当前选定元素
+$(..).clone( true ) 		复制当前选定元素+事件监听函数
+
+&lt;select  size="6">&lt;/select>
+
+
+
+
+
+
+
+总结：jQuery是对DOM操作的简化函数库
+(1)查找元素——选择器
+(2)操作属性  attr()
+(3)操作内容  html() text() val() empty()
+(4)操作样式  css() addClass() removeClass() hasClass() toggleClass()
+(5)添加节点  $(parent).append( child ) ...
+(6)删除节点  $(..).remove( )
+(7)替换节点  replaceWith()  replaceAll()
+(8)克隆节点  clone()  clone(true)
+==========上述内容为jQuery最核心的部分===========
+==========下述内容为jQuery的扩展部分============
+(1)事件处理
+(2)动画特效
+(3)AJAX封装
+
+13.jQuery扩展内容——事件处理——面试题
+  历史上，jQuery先后出现了如下几个事件处理方法：
+  (1)$(..).bind( '事件类型',  fn )		&lt;=> addEventListener()
+$(..).unbind( '事件类型' )			&lt;=> removeEventListener()
+$(..).one( '事件类型', fn )		监听函数仅执行一次
+  (2)bind函数的简化版本——只有常见事件才有简化版本
+$(..).click(fn)			&lt;=>   $(..).bind('click', fn)
+$(..).dblclick(fn)		&lt;=>   $(..).bind('dblclick', fn)
+$(..).mouseover(fn)		&lt;=>   $(..).bind('mouseover', fn)
+$(..).keyup(fn)			&lt;=>   $(..).bind('keyup', fn)	
+.......
+注意：上述所有的事件绑定方法，都只对当前已经存在DOM元素有效；即后添加的DOM元素无法被绑定上。
+  (3) delegate( )
+     undelegate()
+  (4) live( )
+die( )
+  (5) on( )
+
+作业：实现一个计算器的界面及简单输入逻辑
+		</pre>
+	</body>
+</html>

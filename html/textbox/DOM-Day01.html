@@ -1,0 +1,203 @@
+<html>
+	<head>
+		<title>DOM-Day01</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+正课: DOM
+1. 什么是DOM
+2. DOM树
+3. 选取元素
+
+1. 什么是DOM: Document Object Model
+    专门操作网页内容的API
+   js=ECMAScript(核心语法)+DOM+BOM(Browser Object Model)
+   
+   DHTML: 一切实现网页动态效果的技术的统称：
+    DHTML=HTML+CSS+JS
+  
+   鄙视题: 区分: DHTML HTML XHTML XML
+
+   DHTML模型: 
+	BOM: window 全局对象（2天）
+	  history: 封装历史记录栈(和前进，后退，刷新有关)
+          navigator: 封装浏览器的配置信息
+          location: 封装当前网页的url信息（地址栏）
+          screen: 封装桌面分辨率信息——判断设备种类
+          event: 封装事件信息，并监听事件触发
+	DOM: 
+
+   DOM标准分为: 
+      核心DOM: 本来是希望操作一切结构化文档(HTML XML)
+          优: 万能    缺: API繁琐
+      HTML DOM: 对核心DOM中部分常用API提供的简化版本，
+                专门用于操作HTML的内容
+          优: 简洁    缺: 无法实现所有功能，更侧重修改
+      实际开发中: 优先使用HTML DOM，如果无法实现的功能，用核心DOM补充。
+
+2. ***DOM Tree：
+   什么是: 浏览器为页面中每个内容分别创建节点对象
+           所有节点都是按上下级包含关系在内存中以树形结构存储
+   什么是节点: 封装网页中任意一项内容的属性的对象
+       包括: 
+	document对象：根节点
+		当浏览器获得一个网页时，会自动创建document对象
+                所有网页内容中的对象，都是document的子节点
+                包括: 查找 创建
+        元素节点: 专门封装页面中的一个元素
+        文本节点: 专门封装页面中的一段连续的文本
+        属性节点: 专门封装页面中元素的一个属性
+        注释节点: 专门封装页面中一段注释 
+  
+   所有节点的父类型都是:Node
+   节点对象的公共属性: 3个
+       nodeType: 描述节点对象的类型，值是一个数字
+	ELEMENT_NODE: 1
+        ATTRIBUTE_NODE: 2
+        TEXT_NODE: 3
+	DOCUMENT_NODE: 9
+       nodeName: 获取节点名称
+	元素节点: 更精确的获得元素的标签名
+        属性节点: 属性名
+        文本节点: #text
+        document: #document
+       nodeValue: 节点的值
+        元素节点: null
+        属性节点: 属性值
+        文本节点: 文本内容
+        document: null
+
+    节点间关系: 节点树: 包含所有节点对象的树结构
+      2类:
+       1. 父子关系: parentNode childNodes firstChild lastChild
+	childNodes: 返回所有直接子节点的集合——类数组对象
+    遍历: for(var i=0,len=parent.childNodes.length;i&lt;len;i++){
+                     
+          }
+        childNodes返回动态集合。
+	   动态集合: 不返回完整节点对象，仅返回对节点对象的快速扫描结果。
+	   优点: 查询速度快    缺点: 每次查询都要重新访问DOM树
+        问题: 如果反复直接和childNodes.length比较，会造成反复查找
+	解决: 今后，凡是遍历动态集合，都要提前存储集合的length
+	     再和存储的length比较  
+     
+        2. 兄弟关系: previousSibling nextSibling
+    
+    课堂练习: 递归遍历节点树(手写)
+      递归: 函数内部又调用函数自己
+      何时使用: 希望对子内容执行和父内容相同的操作时
+      如何使用: 2步:
+        1. 定义对父元素及其直接子节点的操作方法:
+        2. 遍历父元素下的直接子元素，对每个子元素在调用和父元素相同的方法
+
+      算法: 深度优先: 优先遍历一个节点的下级节点
+                      只有下级节点遍历完，才遍历兄弟节点
+
+    元素树: 仅包含元素节点的树结构
+    优: 不会受到空字符的干扰
+    缺: 无法获得文本节点
+    6个关系: 
+      1.父子关系: parentElementNode
+                  children IE8兼容
+                  firstElementChild
+                  lastElementChild
+      2. 兄弟关系: previousElementSibling,nextElementSibling
+
+    递归API: 
+    1. NodeIterator: 按照深度优先的算法，依次取出每个节点对象
+            强调: 每次只能取1个
+       何时使用: 希望按照深度优先的顺序遍历每个子节点时
+       如何使用: 2步: 
+       1. 创建NodeIterator对象:
+         var iterator=document.createNodeIterator(
+	    parentNode,
+            NodeFilter.SHOW_ALL/SHOW_ELEMENT,
+            null,false
+	 );
+	 强调: 刚创建完迭代器时，并没有站在第一个节点上
+              必须nextNode一次，才可站到第一个节点上
+       2. 使用循环反复调用迭代器对象，获取子节点:
+          var node=iterator.nextNode()
+	      如果有下一个，则返回下一个节点对象
+              否则，返回null
+          var node=iterator.previousNode();
+         如何遍历获得所有子节点: 
+          while((node=iterator.nextNode())!=null){
+              node//当前节点
+          }
+
+    2. TreeWalker
+
+
+正课:
+1. DOM
+   递归API
+2. 选取元素
+
+1. 递归API:
+   1. NodeIterator: 按照深度优先的顺序，依次遍历每个节点对象
+      如何使用: 2步:
+      1. 创建NodeIterator对象:
+         var iterator=document.createNodeIterator(
+ 	    parent, NodeFilter.SHOW_ALL,  null,  false
+                               SHOW_ELEMENT
+	 );
+	 iterator就站在开始父节点上
+      2. 循环调用iterator，遍历每个节点对象
+         var currNode=iterator.nextNode(): 1. 返回当前节点
+                                     2. 然后跳到下一个节点
+         var prevNode=iterator.previousNode():1. 倒退一步
+                                     2. 返回当前节点
+        循环条用: while((node=iterator.nextNode())!=null){
+                       node//当前节点
+                  }
+
+    2. TreeWalker: 可选择跳转方向的迭代器
+                  基本功能和NodeIterator完全一样
+        相同: 开始时都站在开始父元素上
+        不同: nextNode()返回的是下一个节点对象
+              previousNode()返回的是上一个节点对象
+
+        API: parentNode(): 跳到父节点
+             firstChild(): 跳到第一个子节点
+             lastChild(): 跳到最后一个子节点
+             previousSibling(): 跳到前一个兄弟节点
+             nextSibling(): 跳到后一个兄弟节点
+
+2. ***选取元素: 
+   1. 按HTML属性选取: 
+      1. 按id查找: var elem=document.getElementByid("id");
+	返回一个元素对象。如果未找到，返回null
+      2. 按标签名查找: 
+	var elems=parent.getElementsByTagName("tagName");
+        不但找直接子元素，而且还找所有子元素
+      3. 按name属性查找:
+        var elems=parent.getElementsByName("name");
+      4. 按class属性查找:
+        var elems=parent.getElementsByClassName("class")
+      返回值: 返回动态集合(live collection)(类数组对象)
+		优: 查询效率高
+	    遍历时都要先缓存length属性到变量，在和变量比较
+        如果没找到，返回空数组[]
+
+   2. 按选择器查找: 
+      1. 只查找一个符合条件的元素: 
+         var elem=docuemnt.querySelector("selector");
+         返回一个元素对象,如果没找到，返回null
+      2. 查找所有符合条件的元素
+         var elems=document.querySelectorAll("selector");
+         返回静态集合(static collection)
+		缺点: 查询效率低
+	       包含完整的节点对象及其属性
+               DOM树的更改，不会影响当前结果
+           如果没找到,返回空集合[]
+
+      getXXXByXXX  vs querySelector
+        1. getXXXByXXX的效率，比querySelector高的多
+        2. querySelector比getXXXByXXX 使用更简洁
+       如果通过一个属性就可获得结果时，首选getXXX
+       必须通过复杂的查询才可获得结果时，首选querySelector
+		</pre>
+	</body>
+</html>

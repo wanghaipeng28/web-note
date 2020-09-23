@@ -1,0 +1,141 @@
+<html>
+	<head>
+		<title>AngularJS-Day07</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1.所学过的框架整理：
+	jQuery：是一个JS函数库，简化DOM操作
+	jQueryUI：是一个HTML组件库，适用于PC响应
+	Twitter Bootstrap：是一个HTML组件库+样式库，适用于响应式项目
+	Google AngularJS：是一个JS框架，适用于数据操作为主的SPA应用
+	Google AngularUI：是一个HTML组件库，基于AngularJS，提供了强大数据交互能力
+	jQueryMobile：是一个HTML组件框架，适用于移动应用
+
+可用的组合：
+	(1)jQ+jQUI：HTML组件
+	(2)jQ+Boot：HTML组件
+	(3)jQ+NG：数据操作
+	(4)jQ+jQM：HTML组件
+	(5)jQUI+Boot： X
+	(6)jQUI+NG：带数据操作能力的HTML组件
+	(7)jQUI+jQM：  X
+	(8)Boot+NG：带数据操作能力HTML组件+样式库
+	(9)Boot+jQM： X
+	(10)jQM+NG：带数据操作的移动应用
+面试题：
+	DOM、jQ、NG三者间的关系？
+	DOM：查找元素，操作元素
+	jQ：查找元素，操作元素，底层封装了DOM函数
+	NG：创建数据，操作数据，底层的DOM操作依靠jQuery/jqLite
+2.软件/框架的版本：
+	alpha：内部测试阶段
+	beta：外部测试/公开测试阶段
+	rc：Release Candicate，发行候选版
+	m1/m2/m3...: Milestone，里程碑
+	ga：General Available，公众可用版
+	stable：稳定版
+3.AngularJS知识体系
+	(1)概述：JS框架，编写思路：创建数据，操作数据——着眼点在数据上，用户不需要考虑DOM操作。
+	(2)四大特性：
+		1)采用MVC/MVVM模式
+		2)双向数据绑定
+		3)依赖注入
+		4)模块化设计
+
+		http://angularjs.cn/
+
+
+4.模块化设计
+	&lt;script>
+		var age = 20;
+		function add(num){ .... }
+		add(age);
+	&lt;/script>
+	全局变量/函数成为“全局对象”的成员——全局对象的污染；
+	模块(Module)：NG中是一个对象，是抽象概念，用于封装不同的功能组件(函数)，为了隔离，为了避免全局对象的污染——高内聚低耦合。
+	创建新的模块：
+	angular.module('模块名', [依赖列表]);
+	模块的两种使用方法：
+		(1)注册给当前NG应用，成为项目的主模块/启动模块
+		   &lt;html ng-app="模块名">
+		  提示：一个项目只能有一个启动模块
+		(2)一个模块被其他模块所使用
+		   angular.module('主模块', ['用户模块','订单模块','商品模块'])
+
+	一个Angular模块中可以声明哪些资源：
+		(1)变量/常量数据：constant、value
+		(2)各种函数对象：controller、function、filter、directive、service、object、provider....
+
+
+	modal：模态框
+	model：模型
+	module：模块
+
+5.NG四大特性之——MVC模式
+	(1)Model：模型，即业务数据，NG中由保存在特定范围内($scope/$rootScope)的变量担当
+	(2)View：视图，即界面，负责展示业务数据，NG中HTML/CSS+指令来担当
+	(3)Controller：控制器，负责增删改查模型数据，NG中控制器保存在模块中的中特殊的函数对象
+使用MVC的步骤：
+	(1)声明一个模块
+	(2)注册为主模块或被主模块所引用
+	(3)在模块中声明一个控制器函数
+	(4)在视图中创建控制器对象
+	(5)在控制器中创建/获取模型数据
+	(6)利用双向数据绑定在视图中展示数据
+
+提示：控制器对象的本质：对应于页面中的一个布局块，此块中有自己专用的数据，出了此布局块不能再使用这些数据。
+
+面试题：$scope和$rootScope的关系？一个控制器对象的有效范围是多大？
+	$rootScope：在整个ng应用中是唯一的！$id:1  是所有的$scope对象的最终父作用范围。
+	$scope：每个控制器的实例都有一个专用的$scope，$id:2/3/4....，这些作用域对象最终都以$rootScope为祖先作用域对象。
+6.NG中预定义的指令
+  (1)ngApp：声明一个Angular应用的有效范围
+  (2)ngController：创建一个Controller的实例
+
+
+7.NG中预定义的服务对象
+  (1)$http：提供AJAX请求服务
+  (2)$interval：提供周期性定时器服务
+  (3)$timeout：提供一次性定时器服务
+  (4)$window：提供window对象能够提供的服务
+  (5)$document：提供document对象能够提供的服务
+
+
+面试题：$http能否使用$.ajax()代替？  $interval和setInterval()异同？
+	    如何仿写NG中的双向数据绑定？
+需要从双向数据绑定底层原理解释：NG自带的对象在执行完指定的代码后，都会自动添加一句： $scope.$digest() 或者 $scope.$apply()——轮询整个的$watch队列。
+	$interval( fn(){  }, 1000);
+	相当于
+	setInterval(fn(){ ......; $scope.$digest(); }, 1000};
+
+8.NG四大特性之——双向数据绑定
+  方向1：
+	把Model绑定到View，只要Model发生改变，View会随之改变
+	实现原理：
+	每次数据绑定，都会在$watch队列中生成一个DOM操作函数；只要Model数据发生改变，就会触发$watch队列的轮询(digest)。
+方向2：
+	把View(表单元素)绑定到Model，只要View发生改变，Model会随之改变，实现方法：  &lt;input ng-model="模型变量名">
+	
+
+NG的最大的缺陷：
+	每次数据绑定都会生成一个DOM操作函数；只要Model数据改变，就会轮询所有的DOM操作函数。——若数据绑定过多，会导致DOM操作过多，页面更新的速度就会变慢！
+解决办法：
+	(1)减少数据绑定的次数；
+	(2)每个模块对应一个$watch队列，设法拆分为多个module；
+	(3)减少$watch队列中监视函数的数量   {{::num}}
+面试题：说说“依赖注入”的原理？
+	简而言之：NG通过扫描函数的形参名，来创建其所依赖的对象。
+	function LoginCtrl( $scope, $http, $interval){
+	}
+	var str = LoginCtrl.toString();
+	var p1Name = str.substring(第一个小括号所在下标,   第一个逗号所在下标);
+	if(p1Name==='$scope'){
+		var p1 = new $Scope(........);
+	}
+	....
+	new LoginCtrl(p1, p2, p3);
+		</pre>
+	</body>
+</html>

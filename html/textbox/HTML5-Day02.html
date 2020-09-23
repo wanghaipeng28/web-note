@@ -1,0 +1,146 @@
+<html>
+	<head>
+		<title>HTML5-Day02</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1.HTML5新特性—>表单新特性—>表单元素新属性—>与输入验证相关的属性
+  (1)required				必填项
+  (2)minlength="数字"		指定最少的字符个数
+  (3)maxlength="数字"		指定最多的字符个数
+  (4)min="数值"			限定可取最小数值
+  (5)max="数值"			限定可取最大数值
+  (6)step="数值"			限定可取的步长
+  (7)pattern="正则表达式"	使用正则表达式进行输入验证
+
+如何在失去焦点时进行验证？如何自定义错误提示消息？
+——使用Input的validity属性。
+  input.validity：  判定当前输入元素的value是否有效
+ValidityState {
+badInput: false			无效的输入 —— type="number"
+customError: false			存在自定义错误
+patternMismatch: false		正则表达式不匹配 —— pattern
+rangeOverflow: false		值上溢出	—— max
+rangeUnderflow: false		值下溢出 —— min
+stepMismatch: false		步长不匹配 —— step
+tooLong: false				字符串太长 —— maxlength
+tooShort: false				字符串太短 —— minlength
+typeMismatch: false		类型不匹配 —— type="email"
+valid: true
+valueMissing: false			缺少值 —— required
+}
+
+练习：使用HTML5提供的验证属性以及 input.validity 属性，实现表单提交时弹出自定义的错误消息		
+用户名： 必填  
+密码：	必填 长度在6~12之间
+确认密码：必填	值必须与“密码”相同
+年龄：	必须是数字，值在18~60之间
+邮箱：	必须是邮箱
+微博：	必须是URL
+手机：	值必须满足手机号码格式
+
+
+2.HTML5新特性——视频播放
+  HTML5提供了 &lt;video>和&lt;audio> 两个新元素，可以直接在浏览器播放视频和音频，不再依赖于Flash播放器了。
+  &lt;video src="x.mp4">您的浏览器不支持VIDEO标签&lt;/video>
+  或者
+  &lt;video>
+  	&lt;source src="1.mp4">&lt;/source>
+&lt;source src="1.ogg">&lt;/source>
+您的浏览器不支持VIDEO标签
+  &lt;/video>
+  VIDEO标签的常用属性：
+(1)src="xx.mp4"	必需属性，指定播放的视频源
+(2)width="800"	视频播放区域(行内块)的宽度
+(3)height="600"	视频播放区域(行内块)的宽度
+(4)controls		显示播放控件
+(5)autoplay		自动播放
+(6)loop			循环播放
+(7)poster="yy.jpg"	视频尚未播放之前显示的海报
+
+练习：不使用Video元素自带的controls，创建一个自定义的按钮，放在视频的正中央，控制视频播放和暂停。
+
+
+2.HTML5新特性——音频播放
+  &lt;audio src="1.mp3" width="400" height="50" controls  autoplay  loop>
+您的浏览器不支持AUDIO标签
+  &lt;/audio>
+
+
+
+3.HTML5新特性——Canvas绘图——重点
+  Canvas：画布，可以实现在HTML页面中绘制图形和图像，例如：绘制统计图、图标、动画游戏等——所有的绘图内容都是使用js来控制的。
+  &lt;canvas width="500" height="400">
+您的浏览器不支持Canvas绘图技术！
+  &lt;/canvas>
+接下来的绘图任务全部由JS来完成。
+提示：Canvas是画布，可用于盛放绘制的内容；但是绘制图形图像必须使用“画笔” —— Graphics / Context
+var ctx = canvas.getContext( '2d' );
+绘图上下文对象的成员：
+常用属性：
+fillStyle: "#000000"
+font: "10px sans-serif"
+globalAlpha: 1
+lineCap: "butt"
+lineJoin: "miter"
+lineWidth: 1
+miterLimit: 10
+shadowBlur: 0
+shadowColor: "rgba(0, 0, 0, 0)"
+shadowOffsetX: 0
+shadowOffsetY: 0
+strokeStyle: "#000000"
+textAlign: "start"
+textBaseline: "alphabetic"
+常用方法：
+arc: function arc() { [native code] }
+arcTo: function arcTo() { [native code] }
+beginPath: function beginPath() { [native code] }
+clearRect: function clearRect() { [native code] }
+clip: function clip() { [native code] }
+closePath: function closePath() { [native code] }
+createLinearGradient: function createLinearGradient() { [native code] }
+createRadialGradient: function createRadialGradient() { [native code] }
+drawImage: function drawImage() { [native code] }
+ellipse: function ellipse() { [native code] }
+fill: function fill() { [native code] }
+fillRect: function fillRect() { [native code] }
+fillText: function fillText() { [native code] }
+lineTo: function lineTo() { [native code] }
+measureText: function measureText() { [native code] }
+moveTo: function moveTo() { [native code] }
+rect: function rect() { [native code] }
+restore: function restore() { [native code] }
+rotate: function rotate() { [native code] }
+save: function save() { [native code] }
+scale: function scale() { [native code] }
+stroke: function stroke() { [native code] }
+strokeRect: function strokeRect() { [native code] }
+strokeText: function strokeText() { [native code] }
+transform: function transform() { [native code] }
+translate: function translate() { [native code] }
+
+
+(1)使用画笔绘制矩形(Rectangle)
+ctx.fillRect( x, y, w, h )		填充一个矩形区域
+ctx.strokeRect( x, y, w, h )	描边一个矩形区域
+ctx.clearRect( x, y, w, h )		清除一个矩形区域内的所有内容
+ctx.fillStyle = "rgb(255,0,0)";  //填充所使用的颜色或渐变色
+ctx.strokeStyle = "rgb(255,0,0)";  //描边所使用的颜色或渐变色
+ctx.lineWidth = 1;			//用于描边的线的宽度
+练习：绘制国际象棋棋盘(8行8列)  v1: 黑白交错  v2:颜色随机
+练习：使用定时器绘制一个可以往右移动的矩形  
+
+(2)使用画笔绘制圆形
+提示：没有直接绘制圆形的方法
+
+(3)使用画笔绘制文本
+ctx.fillText( txt, x, y )
+ctx.strokeText(  txt, x, y  )
+ctx.font = "10px sans-serif"
+ctx.fillStyle = "#f00";  		//单色或渐变色
+ctx.strokeStyle = "#f00";		//单色或渐变色
+		</pre>
+	</body>
+</html>

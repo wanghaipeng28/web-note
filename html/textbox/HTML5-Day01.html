@@ -1,0 +1,142 @@
+<html>
+	<head>
+		<title>HTML5-Day01</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1.面试题：跨域请求和JSONP——非常抽象
+  跨域：Cross Domain Request，请求不同的域上的资源(HTML/CSS/JS/SCRIPT/JPEG等)，不同的域可能是：
+(1)不同的协议
+(2)不同的域名
+(3)不同的端口号
+
+
+(1)默认情况下，浏览器可以针对HTML、CSS、JS、图片发起跨域请求——同步请求。
+(2)客户端浏览器默认禁用XHR的跨域请求（不论何种资源）——出于安全考虑！
+	非跨域资源	跨域资源
+同步请求	可以	可以
+异步请求(XHR)	可以	不可以
+
+使用场景：项目很大，于是把静态HTML放在A服务器，动态数据(PHP文件)放在B服务器，动态数据(JSP文件)放在C服务器；A服务器上的静态HTML需要动态数据，必需使用异步请求——不能使用XHR发起跨域请求。
+
+浏览器禁用XHR的跨域请求有若干解决办法——百度。
+
+
+解决办法之一： JSON with Padding，JSONP，填充式JSON，是以一种手段、一种技巧，可以巧妙的跨过XHR跨域请求的限制——与JSON不同，不是一种字符串格式。
+思路：
+(1)不使用XHR对象——XHR的跨域请求会被浏览器禁止！
+(2)在DOM树动态添加script元素——SCRIPT的跨域请求浏览器允许
+&lt;script src="跨域地址/xxx.php?fn=doResponse">
+ 	(3)PHP页面返回的JSON字符串稍加改造：
+$json = '{"ename":"Tom", "age":20}';
+//echo $json;
+echo  'doResponse('. $json .')';   //字符串
+(4)在静态HTML页面中声明function doResponse(data){ ...}即可
+===============================================================================
+客户端最终执行的语句如下：
+doResponse({"ename":"Tom", "age":20})
+     其中的函数本地在HTML中声明，其中的数据是PHP返回的。
+
+AJAX和JSONP的关系？
+严格说，二者没有任何关系！
+AJAX的核心是XHR对象，不能发起跨域请求；
+JSONP的核心是SCRIPT元素，可以发起跨域请求；
+二者的相似点：都能实现异步请求，异步获取服务器端数据。
+
+
+2.jQuery对JSONP的支持
+  jQuery对AJAX的封装函数：
+$(...).load( )
+$.get( )
+$.post( )
+$.getScript( )
+$.getJSON( )	使用XHR对象发起异步请求
+$.ajax( )		使用XHR对象发起异步请求
+  jQuery对JSONP的封装函数： 
+$.getJSON( )	使用动态SCRIPT元素发起异步请求
+语法：$.getJSON('跨域地址/xx.php?callback=?', function(data){  })
+$.ajax( )		使用动态SCRIPT元素发起异步请求
+语法：$.ajax({
+url: '跨域地址/xx.php',
+dataType: 'jsonp',
+success: function(data){  }
+});
+
+
+第三阶段的三个话题：
+  (1)jQuery
+  (2)AJAX
+  (3)HTML5新特性 —— 杂乱，且存在兼容性问题，学习中要抓住重点
+1)表单新特性
+2)
+3)Canvas绘图技术
+4)SVG绘图技术
+5)
+6)
+7)
+8)
+9)
+
+
+2.HTML5高级新特性——表单新特性
+  (1)新的input类型			&lt;input type="email">
+  (2)新的表单元素			&lt;progress >
+  (3)表单元素新的属性		&lt;input maxvalue="" pattern="">
+
+
+
+3.新的input 类型
+&lt;input type="?">
+  HTML4/XHTML提供的input类型：
+text、password、radio、checkbox、submit、reset、button、file、hidden、image
+  HTML5新增的input类型：
+(1)email
+(2)search
+(3)url
+(4)tel	在PC浏览器中无效果，只在手机中有效
+(5)number	只允许输入数字，且可以限定范围和步长
+(6)range	在指定范围内选择，可以限定范围和步长
+(7)color  颜色选择输入框
+(8)date	日期选择输入框
+(9)week	周选择输入框
+
+
+练习：使用范围选择输入域(range)，实现颜色的选择（原始版+jQuery版）
+		14:43 ~ 15:00
+
+练习：创建一个学生信息录入表单，尽可能的使用新的input类型
+用户名:	type="text"
+年龄：	type="nubmer"
+生日：	type="date"
+语文：	type="range"
+数学：	type="range"
+英语：	type="range"
+电子邮箱：	type="email"
+联系电话：	type="tel"
+微博地址：	type="url"
+入学月份：	type="month"	
+
+
+
+4.新的表单元素
+ HTML4/XHTML可以使用的表单元素：
+input、select、textarea
+ HTML5新添的表单元素：
+  	(1)datalist	用于为其它输入框提供输入可选项
+&lt;datalist id="ListID">&lt;option>&lt;/option>...&lt;/datalist>
+&lt;input type="text" list="ListID">
+(2)progress	显示进度条，用于提示进行中，或提示执行进度，不能用于提交数据		max  value
+(3)meter     显示刻度尺、标尺、度量衡   min  max  value(当前值)  low(下限值）  high(上限值)  optimum(最优值)
+(4)output 	显示一个运算输出项，如小计、总计等，只是一个语义标签，没有任何外观效果
+
+5.表单元素的新属性
+&lt;input 新属性="属性值">
+(1)autocomplete： 是否启用输入记录功能，为下次输入提供提示。可取值为“on”、“off”
+(2)placeholder： 为输入框提供提示性文字，注意：说明文字不是value！
+(3)multiple：无需指定值，只要出现，就表示当前输入框可以输入多个值，用英文逗号隔开
+(4)autofous：无需指定值，只要出现，就可以自动获得输入焦点
+(5)form：需要赋值为某个form的id，用于将输入域放置在FORM元素的外部，但仍然可以随同表单一同提交
+		</pre>
+	</body>
+</html>

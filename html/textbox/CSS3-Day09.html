@@ -1,0 +1,128 @@
+<html>
+	<head>
+		<title>CSS3-Day09</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+课程目标：
+(1)转换/变形——次重点
+(2)过渡/渐变动画——重点
+(3)帧动画——次重点
+(4)CSS优化——面试题
+
+1.CSS3高级属性——转换
+  transform:  转换、变形
+  语法：  
+父容器 {
+perspective: 视点距离;
+}
+选择器 {
+transform: none/变形函数
+transform-origin: 50% 50%;
+}
+  常用的2D转换函数：
+(1)位移：translate(x)、translate(x, y)，无需指定轴点
+(2)旋转：rotate(deg)，可以指定轴点
+(3)缩放：scale(x)、scale(x,y)  1代表100%，可以指定缩放的原点
+(4)倾斜：skew(xdeg)、skew(xdeg, ydeg)，可以指定倾斜的原点
+  
+  常用的3D转换函数：
+ 	注意：所有的3D转换函数都必须要配合“视点”的使用。Perspective属性必须放在执行3D转换的元素的父元素身上；单位是px——指人的眼睛距屏幕的距离。同一个3D转换，若视点越近，转换效果越夸张。
+
+(1)3D旋转函数——重点：
+rotateX(deg)单杠  rotateY(deg)钢管舞  rotateZ(deg) 
+(2)3D位移函数——了解
+translateZ(z)	Z轴位移效果与缩放类似
+(3)3D缩放——了解
+scaleZ(z)  在Z轴上进行拉伸或压缩——必须配合在X轴或Y轴旋转才能出现Z轴上的缩放效果，注意书写顺序：
+transform: scaleZ(1.5) rotateX(45deg);
+
+
+transform
+translate()
+transition
+
+2.CSS3高级属性——过渡/渐变       
+  transition：用户需要指定动画开始和结束两个点的状态，CSS3自动补全中间缺少的变化过程。如下的CSS属性都可以执行渐变动画：
+·颜色属性，如background-color、color
+·取值为数值的属性，如width、opacity、font-size...
+·转换属性，如transform:各种转换函数
+·visibility 属性
+·阴影属性，box-shadow
+注意：有些CSS属性是不能实现渐变动画的，如字体、背景图片...
+ 语法：  
+选择器 {
+CSS属性: 值1;
+transition:  属性  持续时间;
+}
+选择器 {
+CSS属性: 值2;
+}
+transition属性完整形式：transition: property duration timing-function delay;
+
+提示：渐变动画只能提供的开始和结束两个点的状态样式，中间的过程由CSS补充——如位移：只能做直线位移。
+
+3.CSS高级属性——关键帧(keyframe)动画
+  关键帧动画：由程序员提供的一个动画过程中的若干个关键点的样式属性，每相邻的两个点中间的过渡效果由CSS补充——关键字动画比Transition动画多了很多关键点。使用方法：
+  步骤一：使用 @keyframes 声明动画的关键帧
+@keyframes 动画名称 {
+0% {  }
+xx% {  }
+100% {  }
+}
+  步骤二：在某个选择器中使用指定的关键帧动画
+选择器 {
+animation:  动画名称 持续时间;
+}
+ 动画属性：  
+animation:  name  duration  timing-function  delay;
+ 动画子属性：
+animation-name
+animation-duration
+animation-timing-function
+animation-delay
+更多的其它子属性——了解
+
+Transition(渐变动画)和Keyframes Animation(关键帧动画)的区别：
+  img {
+     width: 200px;
+     transition: width .15s linear;
+  }
+  img:hover {
+     width: 400px; 
+  }
+  @-webkit-keyframes bianKuan {
+    0% {
+       width: 200px;
+    }
+    100% {
+       width: 400px;
+    }
+  }
+  img:hover {
+     -webkit-animation:  bianKuan .15s linear;
+  }
+(1)transition动画简单，只能指定两个关键帧
+   keyframes动画复杂，可以指定多个关键帧
+(2)transition动画浏览器支持性较好
+  keyframes动画目前仍需要加 -webkit- 或 -moz-前缀
+(3)transition动画只能执行一次
+  keyframes可以反复执行多次，并指定每次的执行方向
+
+
+
+4.面试题——谈谈如何进行前端页面优化
+  (1)HTML优化
+  (2)JavaScript优化
+  (3)CSS优化	
+1)减少HTTP请求的次数，如把多张小图合并为一张大图——CSS Sprites。
+2)所有的外部样式文件都放在页面的头部里，而不是页面的最后。
+3)除首页外的其他页面尽量使用外部样式文件，被多个页面所公用。
+4)首页中尽量少使用外部样式文件，全部样式写在页内部。
+5)样式文件中的内容越少越精简越好，尽可能使用简称。
+6)使用压缩工具压缩样式文件，如YUI-Compressor。
+7)尽量不要缩放图片。
+		</pre>
+	</body>
+</html>

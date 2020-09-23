@@ -1,0 +1,168 @@
+<html>
+	<head>
+		<title>CSS-Day07</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1、显示
+   1、显示方式(重点)
+      功能：可以通过 display 属性 修改元素框的显示方式
+      属性：display
+      取值：
+           none : 让生成的元素没有框
+	          让元素脱离文档流
+		  不显示元素(隐藏)
+
+		  隐藏元素，并且不占据页面空间
+	   block : 让元素 像块级一样显示
+	           使用场合：将行内元素 改变成块级元素
+	   inline : 让元素 像行内元素一样去显示
+	           注意：不要将块级元素 改成 行内元素
+	   inline-block : 让元素显示的向 行内块 一样
+	           本身是行内元素：一行内能够显示多个
+		   具备块级元素特点：允许改宽和高
+	   table : 让元素 显示的和 table 一样
+       总结：display 常用方式
+          1、隐藏元素 以及 显示元素
+	     可以通过 display:none的方式隐藏
+	     如果需要显示的话，按照自己默认的方式显示出来即可
+	     比如：div : display:block , span : display:inline;
+          2、如果程序中 ，想修改 行内元素的 尺寸时使用
+	     float:left / right;
+	     display:block / inline-block;
+   2、显示效果
+      1、可见性(非重点)
+         特点：元素可以隐藏，但是空间会保留，不允许被其他元素占据
+	 属性：visibility
+	 取值：
+	       visible : 默认值，可见的
+	       hidden : 元素不可见，但保留空间
+	       collapse : 用在表格元素上，删除一行或一列时，不影响表格整体布局
+      2、透明度(非重点)
+         属性：opacity
+	 取值：0 - 1 之间的小数(能取0 也可以取1)
+	       值越小，越看不清
+      3、垂直对齐方式
+         使用场合：
+	    1、在td中使用 ：
+	    2、在 img 中使用 : 控制图像两端的文本 相对于图像的垂直对齐方式
+	 属性：vertical-align
+	 取值：
+	       top:
+	       middle:
+	       bottom:
+	       baseline : 默认值，基线对齐，默认会将文本放在元素的基线上
+	 注意：通过 修改 图像的vertical-align 为 非 baseline的值，取消默认底部的3px空白距离
+   3、光标(非重点)
+      属性：cursor
+      取值：
+            default 默认值
+	    pointer : 小手(重点)
+	    crosshair : +
+	    text : I
+	    wait : 等待 
+	    help : 帮助
+********************************************************
+1、列表(非重点)
+   功能：灵活控制或修改 列表项的显示标识
+   1、list-style-type
+      修改列表项前面的标识 
+
+      属性：list-style-type
+      取值：
+            none ：无标记（重点）
+	    disc : 实心圆
+	    circle : 空心圆
+	    square :实心方块 
+	    decimal : 数字
+	    ... ...
+   2、列表项图像(非重点)
+      功能：使用自定义图像，作为列表项的显示标识
+      属性：list-style-image(非重点)
+      取值：url(图像路径);
+   3、列表项位置(非重点)
+      属性:list-style-position
+      取值：
+           outside ：列表项标识位于 文本之外，默认值
+	   inside  ：列表项标识更改在文本范围之内
+   4、列表属性
+      功能：将以上三个属性值 综合到一起
+      属性：list-style
+      取值：type url() position;
+      常用写法：list-style:none;(重点)
+2、定位(重点)
+   1、什么是定位
+      相对于其本身位置，应该出现的位置在哪
+   2、定位分类
+      1、普通流定位 / 文档流定位
+      2、浮动定位
+
+      3、相对定位
+      4、绝对定位
+      5、固定定位
+   3、定位属性
+      1、定位属性 
+         属性：position
+	 取值：static / relative / absolute  / fixed 
+      2、偏移属性
+         top ：
+	 bottom ：
+	 left ：
+	 right ：
+
+	 该组属性 能够帮助我们完成元素的位置移动
+      3、堆叠顺序
+         属性：z-index
+	 取值：无单位的数字
+   4、定位方式
+      1、相对定位（重点）
+         1、what
+	    元素框会相对于它原来的位置偏移某个距离
+
+	    要参考 元素本身的位置 然后去实现新的位置移动
+	 2、属性 和 值
+	    position:relative;
+
+	    通过 top / left / bottom / right 属性值实现位置的微调
+	 3、注意：
+	    1、相对定位不会改变元素的形状
+	    2、元素原本所占的控件仍然会保留
+	 4、使用场合
+	    1、元素本身要进行位置的微调时，优先选择相对定位
+	    2、配合绝对定位一起使用(弹出菜单)
+	    3、要实现堆叠顺序的调整
+      2、绝对定位（重点）
+         1、什么是绝对定位
+	    1、绝对定位的元素会脱离文档流，不占据页面空间
+	    2、相对于 最近的 已定位的祖先元素 来实现位置的初始化,如果元素没有已定位的祖先元素，那么就相对于最初的包含框body 实现位置的初始化
+	 2、属性 和 值
+	    position:absolute;
+	    通过 top / left /  bottom / right 实现位置调整
+	 3、使用场合
+	    1、想实现元素堆叠的效果时使用(一个元素压住另外一个元素)
+	    2、弹出菜单
+      3、堆叠顺序（重点）
+         已经定位的元素（尤其是绝对定位）是允许出现堆叠效果的。
+	 默认的堆叠顺序
+	   1、按元素出现的顺序，后来者居上(同级别)
+	   2、子元素永远都会压在父元素的上面(父子级,不可变)
+	 修改堆叠顺序:
+	 属性：z-index
+	 取值：无单位的数字，数字大者靠上
+	 注意：无法修改 父子级元素的堆叠顺序
+
+	 页面中哪些元素能够使用堆叠顺序？？已定位的元素可以使用(relative,absolute,fixed)
+      4、固定定位(非重点)
+         1、什么是固定定位
+	    将元素固定在页面的某个位置处不动
+	    会将元素脱离文档流，不占页面空间
+	 2、属性 和 值 
+	    position:fixed;
+	    通过 left / bottom / right / top 实现位置调整
+      5、静态定位(了解)
+         position:static;
+	 默认定位方式。
+		</pre>
+	</body>
+</html>

@@ -1,0 +1,116 @@
+<html>
+	<head>
+		<title>jQueryMobile-Day08</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+
+jQuery:DOM 60%
+	ng：借助MVC模式，利用双向数据绑定特性，HTML的增强，
+	bootstrap：响应式网页
+
+如何去学习其他的框架？
+	1、遇到问题，看官方手册 demo
+	2、圈子 群+官方论坛+stackoverlfow+github
+	3、直接联系官方技术支持
+
+jqm 为移动端而生，触控、界面支持的很好，ui框。
+
+	车： dodge 
+	玩： 迪士尼
+	家居 ： ikea
+
+webApp NativeApp HybirdApp（phoneGap）
+
+	webApp 网页应用 跨平台
+
+
+nativeApp 原生应用
+	是借助系统提供的原生sdk以及各种组件和服务，来编码生成的应用
+	apk ipa 提供的接口让应用更加流畅
+
+Android java/(C++ + QT)
+iOS object-c/swift
+wp
+对公司来说，成本很高，跨平台不够好
+
+
+hybirdApp
+借助web前端技术+phoneGap
+
+build.phonegap.com
+apk ipa ...
+
+JQM实现更好前端界面，带来和原生开发近乎一样的效果
+
+完成WebApp/HybirdApp/NativeApp的对比
+
+Android 
+
+java
+java虚拟机（Dalvik）
+linux（c语言）
+
+
+iOS oc/swift
+
+oc（c增强）
+*niux内核（BSD的darwen）
+
+Android5.0 引起Google重视，ART（Android Runtime）
+
+
+实现一个原生应用、混合应用
+
+Eclipe+ADT(Android Develop tools)
+
+
+Android现在有第二种方案：
+
+AndroidStudio 2.0版本
+Gradle翻墙+无法联网
+
+
+1、创建模拟器
+
+	目标：编写的原生程序和混合程序所运行的地方就是模拟器
+
+	PC：vmware(ubuntu/黑苹果)
+
+
+	已经把应用程序在前台了，再运行提示报错。
+
+
+	assets
+		目录下的东西不会被编译，所以可以放置我们的前端代码文件
+
+		AndroidManifest.xml
+		设置版本号
+		配置java程序
+		配置权限
+		设置运行环境
+
+
+	编写第一个HybirdApp？
+
+		 //完成网络视图的初始化
+			WebView wv = new WebView(getApplicationContext());
+			
+			//wv.loadUrl("file:///assets/test.html");
+			wv.loadUrl("file:///android_asset/test.html");
+			   
+			//将视图程序给Android窗口
+			setContentView(wv);
+
+
+	如果要执行JS操作怎么办？
+		wv.getSettings().setJavaScriptEnabled(true);
+
+	1、对比bootStrap和jQueryMobile的表格的不同点
+		列切换式表格/回流式表格
+
+	2、ng的“开饭啦”项目	
+		</pre>
+	</body>
+</html>

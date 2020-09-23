@@ -1,0 +1,323 @@
+<html>
+	<head>
+		<title>CSS3-Day08</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1、复杂选择器
+   选择器作用：为了匹配页面的元素
+
+   1、兄弟选择器
+      兄弟：平级 ，具备相同父元素的标记，都可以成为兄弟标记
+      1、相邻兄弟选择器
+         相邻：与 某元素 紧紧挨在一起的元素 
+	 作用：匹配 下一个相邻元素
+	 注意：相邻兄弟只能向下找不能向上找
+	 &lt;div>
+		&lt;p>&lt;/p>
+		&lt;h1 class="head" id="myH1">&lt;/h1>
+		&lt;p class="p1">&lt;/p>
+	 &lt;/div>
+
+	 语法：+ 作为结合符
+	       selector1+selector2
+
+	       h1+p{
+		
+	       }
+
+	       .head+p{}
+	       #myH1+p{}
+       2、通用兄弟选择器
+          作用：匹配某元素后面[所有的]兄弟元素
+	  语法：~作为结合符 
+	        selector1~selector2
+   2、属性选择器
+      1、什么是属性选择器
+         能够将元素所附带的属性及其值用于选择器当中。
+	 id,class,style,title
+	 type,name,value ...
+      2、语法
+         []
+	 
+	 1、[attr]
+	    attr:表示任意一个元素所支持的属性
+	    eg:
+	       [id] : 匹配页面中所有 附带 id 属性的元素
+	       [type]:匹配页面中所有 附带 type属性的元素
+	 2、element[attr]
+	    element:表示页面中能够出现的任意一个元素
+	    eg:
+	        div[id]:匹配页面中所有 附带 id属性的div元素
+		div input[type]:
+         3、element[attr1][attr2]...
+	    eg:
+	       div[id][class]:页面中 同时附带了id和class属性的div元素
+	    
+	    匹配页面中所有 已禁用的 input 元素
+	    input[disabled]
+	 4、element[attr=value]
+	    element:元素
+	    attr:属性
+	    value"值
+
+	    匹配 页面中 附带属性 等于 指定值的元素
+	    匹配 页面中  attr = value 的 element
+
+	    问题：
+	    匹配 页面中 id 值为 p1 的 p元素
+	    p[id=p1] / p[id='p1'] / p[id="p1"]
+	    匹配 页面中 id 值为 p1 并且 class 值为  important的p元素
+	    p[id=p1][class=important]
+	 5、element[class~=value]
+	    特点：
+	      1、class 属性值 是一个 由空格隔开的值列表
+	         &lt;div class="lf lf_btn border">&lt;/div>
+	      2、value 是值列表中一个独立的 单词
+	    eg : 
+		&lt;div class="lf lf_btn border">&lt;/div>
+		获取 class 值列表中 包含 lf_btn 独立单词（类样式）的div元素
+		div[class~=lf_btn]
+		div[class~=btn]
+	 6、element[class^=value]
+	    匹配 class 属性值 是以 value 作为开始的 element元素
+	
+	    div[class^="im"]
+	    能匹配出 
+	    &lt;div class="important">&lt;/div>
+	    &lt;div class="imress">&lt;/div>
+	 7、element[class$=value]
+	    匹配 class 属性值 是以 value 作为结尾的 element元素
+	    div[class$="nd"]
+	    能匹配出
+	    &lt;div class="second">&lt;/div>
+	 8、element[class*=value]
+	    匹配 class 属性值中 包含 value 字符的element元素
+   3、伪类选择器
+      1、分类
+         1、链接伪类
+	    :link
+	    :visited
+	 2、动态伪类
+	    :hover
+	    :active
+	    :focus
+	 3、目标伪类
+	 4、元素状态伪类
+	 5、结构伪类
+	 6、否定伪类
+      2、高级伪类
+         1、目标伪类
+	    作用：突出显示 活动的 html 锚点元素
+	    语法：:target / element:target
+	 2、元素状态伪类
+	    作用：匹配页面中 已启用、禁用、被选中的元素
+	    场合：多数用在表单元素中
+
+	    语法：
+	         :enabled , 匹配每个已启用的元素(非disabled)
+		 :disabled , 匹配每个被禁用的元素(附带有disabled属性的元素)
+		 :checked , 匹配被选中的input元素(只用在 checkbox 和 radio 上 )
+	 3、结构伪类
+	    语法：
+	      1、:first-child
+	         匹配 属于其父元素中的首个子元素
+		 table tbody tr td:first-child
+		 tbody 中的 每行里的 第一列
+
+		 table td:first-child
+	      2、:last-child
+	         匹配 属于其 父元素中的 最后一个子元素
+	      3、:empty
+	         匹配没有子元素的每个元素
+		 Q1:
+		 &lt;div>Hello World&lt;/div> 
+		 有子元素
+		 Q2:
+		 &lt;div>
+			&lt;p>Hello&lt;/p>
+		 &lt;/div>
+		 有子元素
+		 Q3:
+		 &lt;div>      
+		 &lt;/div>
+		 有子元素
+		 Q4:
+		 &lt;div>&lt;/div>
+		 没有子元素
+	      4、:only-child
+	         匹配是其父元素中的唯一子元素
+		 &lt;div>
+		   &lt;p>Hello&lt;/p>  &lt;!-- 唯一子元素 -->
+		 &lt;/div>
+
+		 &lt;div>
+		   &lt;p>Hello&lt;/p>
+		   &lt;div>&lt;/div>
+		 &lt;/div>
+	      5、:nth-child(n)
+	         作用：匹配 属于其父元素中的第 n 个子元素
+	 4、否定伪类
+	    作用：把指定 选择器 匹配到的元素 排除出去
+	    语法：:not(selector)
+	    eg : 
+		table td:not(:first-child) : 匹配 除每行第一列以外的所有列 
+		与 
+		table td:first-child 
+		相对的
+   4、伪元素选择器
+      伪元素：匹配内容
+      伪类选择器：匹配元素
+
+      1、:first-letter  / ::first-letter
+         作用：首字符,匹配指定选择器的首字符
+      2、:first-line / ::first-line
+         作用：匹配指定选择器的首行
+      3、::selection
+         作用：匹配被用户选取部分内容的样式
+
+      : 与 ::的区别
+      1、: 一般只用于伪类选择器
+         :: 一般只用于 伪元素选择器
+      2、在 CSS2 中 ， 没有严格要求 伪元素只能用 :: 这个说法
+         :first-letter 在CSS2中允许使用
+
+	 注意：如果想向前兼容的话,除::selection之外，其余的无论是伪类，还是伪元素，都使用 :
+      4、:before / ::before
+         作用：用于匹配元素的内容区域的前端
+      5、:after / ::after
+         作用：用于匹配元素的内容区域的后端
+2、内容生成
+   1、什么是内容生成
+      向匹配的元素中的内容区域的前端或后端追加文本、图片等相关内容，称之为内容生成(插入新内容)
+   2、属性
+      content
+
+      配合着 :before / :after 伪元素选择器， 就能够向指定元素区域追加新内容
+
+      div:before{
+	content:"";
+      }
+
+      取值：
+          1、字符串，纯文本,普通数据
+	  2、url(图片地址),插入的是一副图片
+	  3、计数器:生成 一个具有一定规律的数字
+3、计数器(非重点)
+   1、作用
+      生成具备一定规律的数字，配合着 内容生成 content属性 一起 将数字插入到 某个位置处取
+   2、属性 和 函数
+      1、counter-reset 属性	
+         复位/初始化 一个计数器
+	 语法：
+	   counter-reset:名称 初始值;
+	   注意：
+	    1、初始值可以省略，默认为0
+
+		   counter-reset:c1; /*创建一个计数器，名称为c1，默认值为0*/
+		   counter-reset:c1 15;/*创建一个计数器，名称为c1，默认值为15*/
+	    2、初始值可以为 负数
+	    3、同时初始化/复位多个计数器
+	       counter-reset:名称1 数值1 名称2 数值2;
+	    4、通常情况下，会放在使用元素的父元素上声明。如果页面中大部分元素需要使用计数器的话，可以声明在 body 中
+	       &lt;style>
+		div{
+			counter-reset:c1 10;
+		}
+	       &lt;/style>
+
+	       &lt;div>
+		&lt;p>&lt;/p>
+		&lt;p>&lt;/p>
+	       &lt;/div>
+       2、counter-increment 属性
+          作用：设置某个选择器每次出现时的计数器的增量，默认值为 1 
+	  注意：
+	     1、计数器可以递增或递减某个值
+	     2、设置的值可以为正(递增)，也可以为负(递减)
+	     3、哪个元素需要使用计数器，该属性就放在哪
+	  语法:   
+	      counter-increment:名称 增量值;
+	      counter-increment:名称1 增量1 名称2 增量2;
+       3、counter() 函数
+          函数 ， 是作为属性值出现的。
+	  作用：使用 某个 计数器 生成的数值
+	  注意：
+	     1、配合着 :before :after , content 属性一起使用
+	  语法：
+		content:counter(计数器名称);
+
+	1、HTML5
+	   1.1 基本标记
+	   1.2 结构标记
+	   1.3 表单元素
+	2、CSS3
+	   2.1 文本属性
+	   2.2 背景属性
+	   2.3 框模型
+4、多列(非重点)
+   1、属性
+      1、column-count 
+         将指定的元素分割成几列
+	 取值：无单位的数值
+      2、column-gap
+         列与列之间的间隔距离
+	 取值：以 px 为单位的数值
+      3、column-rule
+         列规则：相当于是两个列之间的边框，并且设置其 宽度 样式 颜色
+	 column-rule : width style color;
+   2、浏览器兼容性
+      IE 10 + , Opera 支持多列
+      Firefox : -moz-
+      Chrome 和 Safari : -webkit-
+5、CSSHack 
+   1、CSSHack 方式 
+      1、CSS类内部Hack
+         通过 增加 属性前缀 或 值后缀  解决兼容性问题
+
+	 * : IE7 前缀 
+	 - : IE6 前缀
+	 \0 : IE8 后缀
+	 \9\0 :IE9 IE10后缀
+
+	 &lt;style>
+		div{
+			color:red;
+			*color:green;/*IE7*/
+			-color:blue;/*IE6*/
+		}
+	 &lt;/style>
+      2、选择器Hack
+         在选择器前 增加 前缀 解决兼容性问题
+	 * 前缀：IE6
+	 *+ 前缀 ：IE7 
+
+	 *div{ /*IE6*/
+		color:red;
+	 }
+	 *+div{ /*IE7*/
+		color:blue;
+	 }
+      3、HTML头部引用Hack
+         通过 条件注释 解决兼容性问题
+	 条件注释目的：判断浏览器类型和版本
+
+	 html注释：&lt;!-- -->
+	 条件注释：
+	   &lt;!-- [if 条件 IE 版本 ]>
+	   &lt;![endif]-->
+
+	   条件：
+	      省略 ：判断是否为 ie的指定版本
+		      &lt;!-- [if IE 6 ]>
+			该段内容，只有在ie6中能够被识别
+		      &lt;![endif]-->
+	      gt : greater than , 大于指定版本（不包含）
+	      gte : greater than or equal , 大于等于指定版本(包含)
+	      lt : 小于指定版本(不包含)
+	      lte : 小于等于指定版本(包含)
+	      !:指定版本以外的其他版本
+		</pre>
+	</body>
+</html>

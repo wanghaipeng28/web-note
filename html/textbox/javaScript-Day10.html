@@ -1,0 +1,257 @@
+<html>
+	<head>
+		<title>Day10</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+回顾:
+1. ES5标准：
+   对象: 
+    对象属性:
+      命名属性:
+          数据属性: 专门存储数据的属性
+              四大特性: {
+                value:值,
+                writable:true/false,
+                enumerable:true/false,
+                configurable:true/false //一旦改为false不可逆
+              }
+        访问器属性: 专门保护数据属性的特殊属性，不实际存储数据
+              四大特性:{
+                get:function(){return 局部变量},
+                set:function(value){局部变量=value},
+                enumerable:同数据属性
+                configurable:同数据属性
+              }
+           强调: 使用访问器属性，必须有一个受保护的局部变量
+                 都要通过闭包来添加访问器属性: 
+            单独添加访问器属性:
+            (function(){
+                var 局部变量=值;
+                Object.defineProperty(obj,"属性名",{
+		    get:function(){return 局部变量},
+                    set:function(value){局部变量=value},
+                    enumerable:true, configurable:true
+                })
+            })();
+            在构造函数中添加访问器属性:
+            function(属性参数){
+                this.公有属性=参数,
+                ...
+                Object.defineProperty(obj,"属性名",{
+		    get:function(){return 属性参数},
+                    set:function(value){属性参数=value},
+                    enumerable:true, configurable:true
+                })
+            }
+        定义命名属性: 
+           1. 只定义一个命名属性: 
+	        Object.defineProperty(obj,"属性名",{
+                    四大特性
+                })
+           2. 同时定义多个属性:
+                Object.defineProperties(obj,{
+                    属性名1:{
+			四大特性
+ 		    },
+                    ...:{...}
+                })
+           如果指定名称的属性存在，则修改现有属性
+           如果指定名称的属性不存在，则自动创建同名属性
+           默认值: 非defineProperty定义的属性，四大特性默认值都是true。
+                   defineProperty添加的属性，四大特性默认值都是false。
+	   何时修改四大特性: 只要保护属性，就用四大特性控制
+               何时使用数据属性: 只想控制只读，遍历或删除
+               何时使用访问器属性: 希望用自定义逻辑保护变量
+      内部属性:
+
+    Object.create(): 基于现有父对象，创建新对象，继承父对象，同时可为新对象扩展新属性。
+      3件事： 1. 创建新对象
+              2. 设置新对象继承指定父对象
+              3. 为新对象扩展新属性
+      实现继承: 4种:
+        1. 仅修改两个对象间的继承:
+           Object.setPrototypeOf(子，父)
+        2. 修改所有子对象的父对象: 修改构造函数的原型对象
+           时机: 定义完构造函数后，立刻修改
+           构造函数.prototype=父
+        3. 两种类型间的继承。即继承原型(inherit)，又扩展结构(extends): 最像Java的继承。
+           2步:
+            1. extends: 在子类型构造函数开始位置，借用父类型构造函数
+               父类型构造函数.apply(this,arguments)                        2. inherit: 设置子类型构造函数的原型继承父类型构造函数的原型
+               Object.setPrototypeOf(
+                   子类型构造函数.prototype,
+                   父类型构造函数.prototype
+               )      
+        4. 基于现有父对象，创建并扩展一个新的子对象:
+           var son=Object.create(parent,{同defineProperties})
+      强调: 第二个参数的属性特性定义时，默认所有特性都为false
+            建议: 使用Object.create时，都要显示定义所有值为true的特性。
+
+    Object.create(parent) vs Object.clone(org):
+         create: 新对象继承parent
+                 新对象不会复制parent的属性
+         clone: 新对象和org之间没有继承关系
+                新对象会复制parent的属性保存在新对象本地
+
+正课:
+1. ES5:
+   对象：
+     防篡改
+   函数API: bind方法
+   数组API: 
+   严格模式: 
+
+1. 防篡改: 创建对象后，限制对对象的修改
+     3个级别: 
+     1. 禁止扩展: 
+        extensible: 内部,控制能否给对象添加新属性
+           默认: true,可添加新属性
+        获取extensible的值: Object.isExtensible(obj)
+                        用于检查obj能否扩展
+        禁止扩展: Object.preventExtensions(obj)
+              禁止obj后续添加新属性（extensible=false）
+     2. 密封: 在禁止扩展的基础上,将所有属性的configurable设置为false。
+        Object.issealed(obj)判断obj是否被密封
+        Object.seal(obj) 密封obj
+       chrome中特例: 依然可修改其它特性。
+     3. 冻结: 在密封基础上，禁止修改属性的值
+        Object.isFrozen(obj) 判断obj是否被冻结
+        Object.freeze(obj) 冻结一个对象
+
+     都不可逆！
+
+2. 数组API: 迭代方法: 依次对数组中每个元素执行相同的操作
+     3大类: 
+     1.判断: 
+       1. 数组的所有元素，是否都符合要求
+          var bool=arr.every(function(val,idx,arr){
+	      return 判断条件
+	  })
+          其中:val 当前元素的值
+               idx 当前元素的下标i
+               arr 当前数组
+          所有元素都返回true时，才返回true
+          只要一个元素返回false，就返回false
+       2. 数组中是否包含符合要求的元素
+          var bool=arr.some(function(val,idx,arr){
+	      return 判断条件
+	  })
+          只要一个元素返回true，就返回true
+          除非所有元素都返回false，才返回false
+    2. 遍历: 
+      1. forEach: 
+	对原数组中每个元素执行相同操作，直接修改原数组
+      2. map:
+        对原数组中每个元素的值执行相同的操作，再生成新数组
+        原数组元素保持不变
+
+
+
+
+正课
+1. ES5:
+   数组API:
+   bind:
+   严格模式: 
+
+1. 数组API: 
+   过滤和汇总:
+   过滤: 从数组中筛选出符合条件的元素，组成新数组
+     var sub=arr.filter(function(val,idx,arr){
+	return 判断条件
+     });
+     只有符合判断条件的元素，才放入新数组sub中
+     原数组不变。
+
+   汇总: 依次将数组中每个元素的值，汇总出一个最后结果
+     var result=arr.reduce(function(prev,val,idx,arr){
+	return prev和val汇总的结果
+     },base)
+     其中: prev是目前为止的汇总值
+           base表示初始值
+
+2. bind: 
+   call apply bind
+   call vs apply:
+     相同: 借用函数，并更改函数调用时的this为指定对象
+     不同: 第二个参数: 
+         call, 所有参数必须单独传入
+         apply，所有参数必须放在一个数组内整体传入
+                apply再自动打散数组，将参数传递给函数
+
+   bind: 基于现有函数，创建一个新函数，提前将替换this的对象，绑定给新函数。
+   何时使用: 基于现有函数，创建一个新函数
+             并提前永久绑定this，和部分参数值时
+   vs call/apply: 都是替换this
+     不同: call/apply：借用: this都是临时替换
+                       *调用*: 
+           bind: 永久绑定this
+                 为指定对象*创建*一个专属的函数副本。
+   如何使用:
+     1. 仅将newFun中的this绑定为obj:var newFun=fun.bind(obj);
+     2. 同时给newFun提前绑定this和个别参数:
+          var newFun=fun.bind(obj,param1,...);
+          仅绑定部分参数。
+          剩余参数需要在调用时动态传入:
+          newFun(剩余参数值);
+
+3. 严格模式:
+    启用严格模式： 2个范围:
+     1. 整个&lt;script>范围内都采用严格模式:
+        在&lt;script>的顶部写: "use strict";
+        何时使用: 新开发的项目，建议全用严格模式
+     2. 仅在一个函数内使用严格模式: 
+        在函数定义的顶部: "use strict"
+        何时使用: 维护旧的项目，逐个函数向严格模式迁移
+    规定: 
+    1. 不允许对未声明的变量赋值
+    2. 将静默失败升级为错误
+    3. 严格模式下新增eval作用域: eval内声明的变量，eval结束后无法使用。
+    4. 匿名函数自调中arguments.callee失效
+         意味着: 匿名函数不再允许递归调用
+
+4. js扩展之this的使用
+什么是this: *在调用函数时*，引用正在调用函数的对象的 关键字
+何时使用: 只要对象自己的方法，要使用自己的属性时，就用this
+各种情况: 
+   1. 对象内部的方法,被对象自己调用: 
+      var ename="scott";
+      var obj={
+	ename:"eric",
+        fun:function(){console.log(this.ename);}
+      }
+      obj.fun();//this->obj
+   2. 函数传递给其他变量存储:
+      var fun=obj.fun;
+      fun();//this->window scott
+   ***鄙视时: this和定义在哪儿无关！
+              只和调用时，使用的对象(.前的对象)有关
+              如果没有用任何对象，就直接调用的函数this->window
+   3. 使用call/apply 临时替换this —— 临时的
+	this->call/apply的第一个参数对象
+   4. 使用bind基于一个函数创建一个新函数，同时提前绑定this
+        永久的，不可被替换的！
+   5. 绑定事件处理函数: 
+	function fun(){...}
+     1. html: 绑定:&lt;button onclick="fun()"  this->
+                btn.onclick=new Function("fun()")
+                            function(){//this->btn
+				fun();//this->window
+                            }
+              调用: btn.onclick();//this->btn
+     2. js: 绑定: btn.onclick=fun; //this->btn
+                  btn.addEventListener("click",fun);
+					      fun中的this->btn
+            调用: btn.onclick();//btn.fun();
+     3. 在对象的方法内部绑定事件处理函数: 
+          事件处理函数中要求即使用对象的属性，由使用当前事件绑定的元素对象: 
+	   不能用bind！因为bind会将当前事件绑定的元素对象替换
+           解决: 留住this : var me=this
+
+   6. 定时器回调和匿名函数自调: this默认都指window
+        如果希望使用所属对象的属性: 用bind永久替换this
+		</pre>
+	</body>
+</html>

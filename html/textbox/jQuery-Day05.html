@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<title>jQuery-Day05</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+1.Masonry插件
+  彩砖墙、瀑布流插件
+  http://masonry.desandro.com/
+Masonry is a JavaScript grid layout library. It works by placing elements in optimal position based on available vertical space, sort of like a mason fitting stones in a wall. 
+
+2.为jQuery自定义插件函数
+  jQuery有两种形式的插件函数
+ (1)jQuery全局扩展函数
+   	全局函数可以操作任意的数据，如Array、String、Date...
+ 	function add(  ){  }    //JS全局函数，污染了全局对象
+定义语法： 
+  jQuery.fnName = function(){  }
+  jQuery.namepace = {
+fnName : function(){  }
+  };
+ 	使用方法：  jQuery.fnName(  任意类型的实参 )
+ (2)jQuery对象(类数组对象)的扩展函数
+这样的扩展函数操作目标是jQuery类数组对象
+定义语法： jQuery.fn.fnName = function(){  }
+使用方法： $('...').fnName( );
+   提示：jQuery对象的所有函数都在fn这个名称空间下。
+
+jQuery.fn = { }
+jQuery.fn.css = function(){  }
+jQuery.fn.html = function(){  }
+jQuery.fn.click = function(){  }
+jQuery.fn.sum = function(){  }
+$('div').css().html().click().sum()
+
+AJAX
+
+1.访问服务器
+  客户端访问服务器必须提供URL地址，包含如下几部分：
+  (1)协议
+  (2)地址
+  (3)端口号
+一个操作系统最多可以打开65535(2^16)个端口；
+已经被占用的端口不能再被其他服务程序所占用。
+查看当前端口占用情况：
+  netstat     
+  netstat  -anb
+
+MB  GB  TB   PB  EB  ZB  YB  BB
+
+2.数据库服务器
+  数据库的种类：  网状数据库 => 树形数据库 => 关系型数据库（当前主流） => 对象型数据库
+  关系型数据库系统分为两部分：
+  (1)数据库服务器： 保存数据、维护数据
+  (2)数据库客户端： 向服务器发起命令(增删改查)
+  关系型数据库服务器中的数据的逻辑结构：
+DBServer  -> Database -> Table -> Row -> Column
+
+3.使用MySQL数据库系统
+  (1)安装MySQL服务器端软件（http://www.mysql.com/）
+c:/xampp/mysql/bin/mysqld.exe  服务器启动/停止程序
+  (2)启动MySQL服务器
+启动服务器之前必须确保3306端口未被占用！
+
+服务器启动成功的标识：3306端口已打开。
+  (3)在客户端安装MySQL客户端软件
+ 	命令行版本客户端：  c:/xampp/mysql/bin/mysql.exe
+网页版本的客户端：  phpMyAdmin  
+  (4)在客户端使用MySQL客户端软件远程连接机房中MySQL服务器
+c:/xampp/mysql/bin/mysql.exe  -h127.0.0.1  -uroot  -p  -P3306
+-h: Host    -u: User   -p: password   -P: Port
+可以简写为：  mysql  -uroot  
+
+
+XAMPP是一个开源的服务器套装(https://www.apachefriends.org)
+  XAMPP = Apache + MySQL + PHP + Perl 
+LAMP / WAMP / XAMP
+
+
+
+
+1602A：练习内容：根据下面提示，编写出需要的SQL语句
+##告诉服务器下述SQL语句所用的编码方式
+##删除一个jd数据库(如果存在的话)
+##创建一个jd数据库，指定其中保存的数据所用的编码
+##进入刚刚创建的数据库
+
+##创建一个部门信息的表： dept，保存部门编号、部门名称、所在地		
+##向部门表中插入三行记录，分别是“研发部”、“市场部”、“运营部”
+
+##创建一个员工信息的表： emp，保存员工编号、姓名、性别、生日、工资、所在部门等信息。		
+##向员工表中插入五行记录
+
+##查询两个表中的所有记录行   
+##查询研发部的所有员工信息
+		</pre>
+	</body>
+</html>
