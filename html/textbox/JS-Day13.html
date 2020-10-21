@@ -1,0 +1,183 @@
+<html>
+	<head>
+		<title>JS-基础-Day13</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	</head>
+	<body style="margin:0px;padding-left:25px;background-color:#B5D7B5;">
+		<pre style="word-wrap: break-word; white-space: pre-wrap;font-size:20pt;padding-top:50px;">
+回顾: 
+1. 分支
+   什么是: 根据不同条件，执行不同任务
+   如何使用:
+　　　1. 一个条件，一件事，满足就做，不满足就不做
+         if(条件){操作}
+      2. 一个条件，两件事，二选一执行
+         if(条件){操作1}
+         else{操作2}
+      3. 多个条件，多件事，多选一执行
+         if(条件1){操作1}
+         else if(条件2){操作2}
+         ...
+         else{默认操作}
+      强调: 1. 如果前一个条件已经满足，则后续条件不再执行
+            2. 如果走到下一个条件，就暗示前一个条件不满足
+            3. 最后一个else可省略，一旦所有条件都不满足，就什么都不执行
+
+2. ***循环:
+    什么是: 反复执行同一代码段
+    如何使用: 
+      三要素: 
+	1. 循环条件: 允许进入循环的条件
+        2. 循环变量: 循环条件中用作比较的变量
+               一般都会向着不满足条件的趋势不断变换
+        3. 循环体: 反复执行的代码段
+      
+      如果循环变量的变化没有规律:while循环
+        var 循环变量=初始值;
+  |---->while(循环条件){
+  |          循环体
+  |          修改循环变量
+  |-----}
+
+      如果循环变量的变化有规律: for循环
+  	for(var 循环变量=初始值; | 循环条件;&lt;-修改循环变量 |){
+                                 |    ↓          ↑       |
+				 | 循环体----------|       |
+  	}
+      特殊: 1. 第一部分可同时声明并初始化多个循环变量
+            2. 第三部分可同时执行多个短小的操作，用逗号
+            3. 第一部分可提前到循环外或省略
+               第三部分可放在循环体之后，或省略
+      死循环: for(;;){操作} ==> while(true){操作}
+
+正课
+1. ***数组
+2. DOM入门
+
+1.***数组: 
+什么是数组: 内存中连续存储多个值的存储空间，再起一个统一的名字
+            一组连续的变量，起一个统一的变量名
+为什么: 程序=数据结构+算法
+      算法: 解决问题的步骤
+          顺序，分支，循环其实都是最简单的算法
+      数据结构: 数据在内存中的存储方式
+      *良好的数据结构，可极大提高程序的执行效率
+何时使用: 如果存储多个相关的数据时，都要集中连续存储
+如何使用: 
+    创建: 
+	1. 创建空数组: 
+	   var arr=[];
+           var arr=new Array();
+                  新建 数组
+        2. 创建数组同时，初始化数组内容:
+           var arr=[值1,值2,......];
+	   var arr=new Array(值1,值2,......);
+        3. 创建n个空元素的数组:
+           var arr=new Array(n);
+	
+       下标: 每个元素的唯一序号
+            自动分配，从0开始，连续不重复
+
+    访问元素：数组名[下标] ->元素
+              每个元素的用法和普通变量，完全一样！
+
+    特殊： 1. 下标越界：
+             获取元素值: 不会报错，而是返回undefined
+             修改元素值: 不会报错，而是在指定位置自动创建新元素。后果: 下标不再连续——也称为稀疏数组
+           2. 不限制每个元素的数据类型
+
+    数组.length属性: 记录了数组的元素个数(长度)
+        但是: length无法实际表示存储个数
+           ***length只是一个理论值，永远是最大下标+1
+           ***最后一个下标永远等于length-1
+      固定套路: 
+	1. 获得数组最后一个元素:arr[arr.length-1]
+        2. 在数组末尾追加一个新元素: arr[arr.length]=新值;
+	         
+    数组遍历: 依次对数组的每个元素执行相同的操作
+    如何遍历: for(var i=0;i&lt;arr.length;i++){
+	          arr[i]//当前元素
+              }
+正课:
+1. ***DOM:
+   DOM树
+   查找元素
+   修改元素
+
+1. ***DOM: Document Object Model
+           文档     对象   模型
+   什么是: 专门操作网页内容的API
+   功能: 增，删，改，查   
+
+   鄙视题: HTML XHTML DHTML
+       HTML: 专门编写网页内容的语言
+       XHTML: 更严格的HTML标准
+       DHTML: 一切实现网页动态效果的技术的统称
+         DHTML=HTML+CSS+JS
+
+   DOM树: 一个网页被加载进内存时
+          都会先创建一个对象document，指代正在打开的网页内容
+          网页中的一切内容都是document的子节点（Node）
+          以document为根，所有网页中的内容组成的树形结构就是DOM树。
+
+   查找元素: 
+     1. 按照节点关系查找: 
+       节点树: 包含所有内容的节点
+       父子关系: parentNode  childNodes  firstChild lastChild
+       兄弟关系: previousSibling  nextSibling
+       强调: 看不见的空字符(空格，回车，制表符)
+             除了parentNode外，都会受到空字符的干扰!
+       
+       元素树: 仅包含元素节点
+	问题: 不包含任何文本节点
+       父子关系: 
+parentElementNode children firstElementChild lastElementChild
+       兄弟关系: previousElementSibling  nextElementSibling
+
+     2. 用API查找：通过HTML属性: 
+       1. 按id查找元素:
+         var elem=document.getElementById("id");
+         返回值: 返回一个节点对象
+         其实，id本身就是一个全局变量
+       2. 按标签名查找: 
+         var elems=elem.getElementsByTagName("标签名");
+          意为: 在elem元素下，查找所有指定的“标签”
+         返回值: 返回多个节点对象，组成的一个集合(像数组一样)
+ 	强调:getElementsByTagName不但可找到直接子节点，还会找到所有间接子节点。
+       3. 按name属性查找: 
+         var elems=elem.getElementsByName("name");
+	  意为: 在elem元素下，查找所有name属性为指定值得元素
+         返回值: 返回多个节点对象，组成的一个集合(像数组一样)
+       4. 按class属性查找: 
+         var elems=elem.getElementsByClassName("class")
+	  意为: 在elem元素下，查找所有class属性为"class"的元素
+
+    3. 按选择器查找:
+	1. 找一个元素: 
+           var elem=elem.querySelector("选择器");
+	2. 找多个元素: 
+           var elems=elem.querySelectorAll("选择器");
+
+    修改：
+      1. 修改元素内容: 
+	elem.innerHTML: 表示开始标签到结束标签之间的html内容
+
+      课堂练习: 
+	事件:用户出发的浏览器元素状态的改变        
+        单击事件: onclick
+        何时定义事件: 只要希望单击元素时，指定的任务都要定义在onclick中
+	如何定义: 2步
+            1. 定义一个函数: 用于在事件发生时执行任务
+            2. 在元素的onclick属性上调用任务函数
+	强调: 事件最大的特点是只有事件触发，才执行任务
+
+        this关键字，在事件发生时，自动获得当前触发事件的元素
+	何时使用: 如果事件的函数内用到了当前元素
+
+      2. 获取或修改标准属性: 
+	elem.标准属性
+        比如: elem.id
+        修改样式: elem.style.css属性
+		</pre>
+	</body>
+</html>
